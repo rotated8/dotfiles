@@ -1,0 +1,25 @@
+[user]
+    name = Collin Brittle
+    email = cnbrittle@gmail.com
+[alias]
+    s = status -sb
+    d = diff -w --patience
+    g = grep -Ii
+    br = branch -vv
+    co = checkout
+    up = remote update -p
+    amend = commit --amend
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    # delete remote branch = git push remote :branch
+[color]
+    ui = true
+[core]
+    editor = vim
+    excludesfile = ~/Python.gitignore
+[help]
+    autocorrect = 50
+[grep]
+    patternType = perl
+    lineNumber = true
+[push]
+    default = upstream
