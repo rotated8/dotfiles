@@ -31,6 +31,9 @@ export VISUAL=gvim
 # Add some things to the PATH.
 export PATH="/usr/local/bin:/usr/local/share/python3:${PATH}"
 
+# Set up go.
+export GOPATH="${HOME}/go/"
+
 # Add RVM to PATH for scripting
 PATH=$PATH:$HOME/.rvm/bin
 # Load RVM into a shell session *as a function*
