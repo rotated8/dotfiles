@@ -19,6 +19,7 @@ PS1="\[\033[1;33m\]\u@\h\[\033[0;31m\]\$(parse_git_branch)\[\033[0m\] \W\$ "
 alias g='grep -Prin'
 
 # ls Should list everything except '.' and '..', and have color.
+export LSCOLORS='dxfxcxdxbxegedabagacad' # Directories are NOT dark blue.                          
 alias ls='ls -AG'
 
 # getmod gets the mode of a file, without having to look up stat.
