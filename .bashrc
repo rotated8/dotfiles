@@ -13,7 +13,7 @@ function parse_git_branch {
     git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ \[\1\]/'
 }
 # Prompt is 'user@host [branch](in red) directory_name$ '
-PS1="\[\033[1;33m\]\u@\h\[\033[0;31m\]\$(parse_git_branch)\[\033[0m\] \W\$ "
+PS1="\[\033[1;33m\]\s v\v\[\033[0;31m\]\$(parse_git_branch)\[\033[0m\] \W \$ "
 
 # Grep should use perl regexps, be recursive, ignore case, and print line numbers. In that order.
 alias g='grep -Prin'
@@ -30,7 +30,7 @@ export EDITOR=vim
 export VISUAL=gvim
 
 # Add some things to the PATH.
-export PATH="/usr/local/bin:/usr/local/share/python3:${PATH}"
+export PATH="/usr/local/bin:${PATH}"
 
 # Set up go.
 export GOPATH="${HOME}/go/"
