@@ -15,7 +15,6 @@
     ui = true
 [core]
     editor = vim
-    excludesfile = ~/Python.gitignore
 [help]
     autocorrect = 50
 [grep]
