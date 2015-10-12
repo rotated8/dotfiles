@@ -3,7 +3,7 @@
     email = cnbrittle@gmail.com
 [alias]
     s = status -sb
-    d = diff -w --patience
+    d = diff -w
     g = grep -Ii
     br = branch -vv
     co = checkout
@@ -15,6 +15,7 @@
     ui = true
 [core]
     editor = vim
+    excludesfile = ~/Python.gitignore
 [help]
     autocorrect = 50
 [grep]
@@ -22,3 +23,10 @@
     lineNumber = true
 [push]
     default = upstream
+[filter "media"]
+    clean = git-media-clean %f
+    smudge = git-media-smudge %f
+[filter "hawser"]
+    clean = git hawser clean %f
+    smudge = git hawser smudge %f
+    required = true

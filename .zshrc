@@ -38,14 +38,24 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-# Brew is already in $PATH.
+# Brew is already in $PATH, via line 32 above, which is for oh-my-zsh
 
-# Add RVM to PATH for scripting
-export PATH="$PATH:$HOME/.rvm/bin"
+# Add rbenv to shell, if it exists.
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
-# From .zlogin:
-# Load RVM into a shell session *as a function*
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+# Add soffice to PATH, conditinally.
+if [[ -e $HOME/Applications/LibreOffice.app/ ]]; then
+    export PATH=$PATH:$HOME/Applications/LibreOffice.app/Contents/MacOS
+else
+    echo 'LibreOffice not in ~/Applications/'
+fi
+
+# Add FITS to PATH, conditionally.
+if [[ -e $HOME/workspace/fits-0.6.2/ ]]; then
+    export PATH=$PATH:$HOME/workspace/fits-0.6.2
+else
+    echo 'FITS not in ~/workspace/'
+fi
 
 # Prefer Vim
 export EDITOR=vim

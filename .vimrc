@@ -3,34 +3,46 @@ set nocompatible
 " Modelines may be a security hole.
 set nomodeline
 
-" Pathogen!
-call pathogen#infect()
+" Vundle Settings
+" Run the commands below first on a new computer.
+" `git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
+" `vim +PluginInstall +qall`
+filetype off
+set runtimepath+=~/.vim/bundle/Vundle.vim,
+call vundle#begin()
+Plugin 'gmarik/Vundle.vim' " Vundle takes care of itself.
+Plugin 'bling/vim-airline' " A powerline replacement. Makes the bottom pretty.
+Plugin 'Townk/vim-autoclose' " Closes matched pairs automatically.
+Plugin 'airblade/vim-gitgutter' " In a git repo, show the file's git state in the gutter.
+Plugin 'jnurmine/Zenburn' " Colorscheme. No bleeding-eyes neon.
+call vundle#end()
 filetype plugin indent on
 
-" Powerline settings.
-"set t_Co=256 " Explicitly make the terminal colorful. (This shouldn't be necessary.)
-let g:Powerline_symbols = 'fancy'
-set noshowmode " Eliminate redundant message on bottom line.
+" Airline Settings
+" Be sure to use a patched Powerline font.
+let g:airline_powerline_fonts = 1
+" Explicitly make the terminal colorful. (This shouldn't be necessary. Use -2 with tmux.)
+"set t_Co=256
+" Eliminate redundant message on bottom line.
+set noshowmode
+" Always show the status line.
+set laststatus=2
 
-" Git Gutter settings.
-let g:gitgutter_diff_args = '-w --patience'
+" Git Gutter Settings.
+let g:gitgutter_diff_args = '-w'
 
-" Attempt to fix autoclose.
-
-
-" GUI options.
+" GUI Settings
 if has('gui_running')
     set guioptions-=T " No stupid toolbar.
-    set guifont=Inconsolata-dz-pl:h12 " Best damn font. Suck it Helvetica and Proxima Nueue!
-    set showtabline=0 " Never show tab bar. File name is in powerline. Use buffers and splits!
+    set guifont=Vimconsolata:h12 " Best damn font. Included in the dotfile repo.
+    set showtabline=0 " Never show tab bar. File name is in airline. Use buffers and splits!
 endif
 
-" Windows!
+" Windows Settings
 if has("win32") || has("win64")
     augroup windows
         autocmd!
-        autocmd GUIEnter * simalt ~x " Fullscreen.
-        autocmd GUIEnter * set guifont=Inconsolata-dz-pl:h10 " Resize for home.
+        "autocmd GUIEnter * simalt ~x " Fullscreen.
     augroup END
 endif
 
@@ -47,7 +59,7 @@ augroup END
 
 " Syntax Highlighting. MUST.
 syntax on
-" I like my colors.
+" Colors via the last plugin above.
 colorscheme zenburn
 " Number lines
 set number
@@ -81,9 +93,7 @@ set matchpairs +=':'
 " NO BELLS
 set noerrorbells
 set visualbell
-"set vb t_vb= " Uncomment to get rid of any bell.
-" Always show the status line.
-set laststatus=2
+"set vb t_vb= " Removes any bell.
 
 " Bad whitespace shows up in red.
 highlight BadWhitespace ctermbg=1 guibg=Red
@@ -122,5 +132,5 @@ nnoremap <S-Right> :bnext<CR>
 nnoremap <leader>ev :edit $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 " Resize font for blind people.
-nnoremap <F11> :set guifont=Inconsolata-dz-pl:h12<CR>
-nnoremap <F12> :set guifont=Inconsolata-dz-pl:h27<CR>
+nnoremap <F11> :set guifont=Vimconsolata:h12<CR>
+nnoremap <F12> :set guifont=Vimconsolata:h27<CR>
