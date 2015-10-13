@@ -25,6 +25,9 @@ alias ls='ls -AG'
 # getmod gets the mode of a file, without having to look up stat.
 alias getmod='stat -f "%p %N"'
 
+# Prefer nvim if installed
+if which nvim > /dev/null; then alias vim='nvim'; fi
+
 # Try to coerce vim usage when an editor is needed.
 export EDITOR=vim
 export VISUAL=gvim
