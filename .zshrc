@@ -69,8 +69,11 @@ export VISUAL=gvim
 # Grep should use perl regexes, be recursive, ignore case, and print line numbers, in that order.
 alias g='grep -Prin'
 # ls should list everything except '.' and '..' in long form, and have color.
-alias ls='ls -AGl'
+alias ls='ls -AGlh'
 # getmod checks the mode of a file, without having to remember stat.
 alias getmod='stat -f "%p %N"'
 # Prefer nvim, if installed.
-if which nvim > /dev/null; then alias vim='nvim'; fi
+if which nvim > /dev/null; then
+    alias vim='nvim'
+    export EDITOR=nvim
+fi
