@@ -10,5 +10,6 @@ The .zshrc requires [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh).
 
 The .vimrc uses vundle. Install it by running
 
-```git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-vim +PluginInstall +qall```
+``git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim``
+
+``vim +PluginInstall +qall``
