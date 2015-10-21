@@ -66,6 +66,8 @@ set number
 " Lightly highlight column 99
 set colorcolumn=99
 highlight ColorColumn ctermbg=236 guibg=#3f4040
+" Highlight the line the cursor is on
+set cursorline
 " Vertical splits split to the right
 set splitright
 " Regular splits split below.
