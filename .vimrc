@@ -1,12 +1,15 @@
-" I couldn't care less about Vi.
+" I couldn't care less about Vi. This is a nop in nvim.
 set nocompatible
 " Modelines may be a security hole.
 set nomodeline
+" Remove previously set autocommands, in case this is reloaded.
+autocmd!
 
 " Vundle Settings
 " Run the commands below first on a new computer.
 " `git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
 " `vim +PluginInstall +qall`
+" Make sure to link .vim and .vimrc to .nvim and .nvimrc, too.
 filetype off
 set runtimepath+=~/.vim/bundle/Vundle.vim,
 call vundle#begin()
@@ -18,8 +21,10 @@ Plugin 'jnurmine/Zenburn' " Colorscheme. No bleeding-eyes neon.
 call vundle#end()
 filetype plugin indent on
 
-" Airline Settings
+" vim-airline Settings
 " Be sure to use a patched Powerline font.
+" For iTerm2, make sure the profile's non-ASCII font is the same as the ASCII font,
+" and transparency is turned off, and text contrast is set to minimum.
 let g:airline_powerline_fonts = 1
 " Explicitly make the terminal colorful. (This shouldn't be necessary. Use -2 with tmux.)
 "set t_Co=256
@@ -27,8 +32,12 @@ let g:airline_powerline_fonts = 1
 set noshowmode
 " Always show the status line.
 set laststatus=2
+"
+" vim-autoclose Settings
+" Add angle brackets to autoclose for HTML
+autocmd Filetype html,eruby let b:AutoClosePairs_add = '<>'
 
-" Git Gutter Settings.
+" vim-gitgutter Settings.
 let g:gitgutter_diff_args = '-w'
 
 " GUI Settings
@@ -65,9 +74,13 @@ colorscheme zenburn
 set number
 " Lightly highlight column 99
 set colorcolumn=99
-highlight ColorColumn ctermbg=236 guibg=#3f4040
+highlight ColorColumn ctermbg=238 guibg=#434443
 " Highlight the line the cursor is on
 set cursorline
+" Make tab completion interactable. On be default in nvim.
+set wildmenu
+" Don't redraw during macros, and other untyped input.
+set lazyredraw
 " Vertical splits split to the right
 set splitright
 " Regular splits split below.
@@ -89,9 +102,11 @@ set tildeop
 set ignorecase
 set smartcase
 " Angle brackets, doublequotes, and singlequotes are matched.
+" Reflects the settings from vim-autoclose
 set matchpairs +=<:>
 set matchpairs +=":"
 set matchpairs +=':'
+set matchpairs +=`:`
 " NO BELLS
 set noerrorbells
 set visualbell
@@ -133,6 +148,8 @@ nnoremap <S-Right> :bnext<CR>
 " Leader is '\' by default.
 nnoremap <leader>ev :edit $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
+" Make it easy to open the .zshrc file too.
+nnoremap <leader>ez :edit ~/.zshrc<CR>
 " Resize font for blind people.
 nnoremap <F11> :set guifont=Vimconsolata:h12<CR>
 nnoremap <F12> :set guifont=Vimconsolata:h27<CR>

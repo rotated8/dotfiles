@@ -13,3 +13,7 @@ The .vimrc uses vundle. Install it by running
 ``git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim``
 
 ``vim +PluginInstall +qall``
+
+When using iTerm2, vim-airline needs transparency turned off, text contrast at minimum, and both the ASCII and non-ASCII fonts to support the powerline symbols (and probably the same font, in the end).
+
+For Neovim, link .vim and .vimrc to .nvim and .nvimrc respectively.
