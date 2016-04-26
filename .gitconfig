@@ -12,21 +12,17 @@
     lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     # delete remote branch = git push remote :branch
 [color]
-    ui = true
+    ui = auto
 [core]
     editor = vim
-    excludesfile = ~/Python.gitignore
+[diff]
+    algorithm = patience
+[fetch]
+    prune = true
+[grep]
+    lineNumber = true
+    patternType = perl
 [help]
     autocorrect = 50
-[grep]
-    patternType = perl
-    lineNumber = true
 [push]
-    default = upstream
-[filter "media"]
-    clean = git-media-clean %f
-    smudge = git-media-smudge %f
-[filter "hawser"]
-    clean = git hawser clean %f
-    smudge = git hawser smudge %f
-    required = true
+    default = current
