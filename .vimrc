@@ -101,6 +101,8 @@ set tildeop
 " Search ignores case, unless I capitalize.
 set ignorecase
 set smartcase
+" Do not highlight search matches.
+set nohlsearch
 " Angle brackets, doublequotes, and singlequotes are matched.
 " Reflects the settings from vim-autoclose
 set matchpairs +=<:>
