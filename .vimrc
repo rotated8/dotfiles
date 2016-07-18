@@ -69,7 +69,7 @@ augroup END
 " Syntax Highlighting. MUST.
 syntax on
 " Colors via the last plugin above.
-colorscheme zenburn
+silent! colorscheme zenburn
 " Number lines
 set number
 " Lightly highlight column 99
