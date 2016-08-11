@@ -22,6 +22,9 @@ alias g='grep -Prin'
 export LSCOLORS='dxfxcxdxbxegedabagacad' # Directories are NOT dark blue.
 alias ls='ls -AGlh'
 
+# tree should act like ls
+alias tree='tree -Ca'
+
 # getmod gets the mode of a file, without having to look up stat.
 alias getmod='stat -f "%p %N"'
 

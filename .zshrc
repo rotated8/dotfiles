@@ -56,6 +56,8 @@ export VISUAL=gvim
 alias g='grep -Prin'
 # ls should list everything except '.' and '..' in long form, and have color.
 alias ls='ls -AGlh'
+# tree should cat like ls
+alias tree='tree -Ca'
 # getmod checks the mode of a file, without having to remember stat.
 alias getmod='stat -f "%p %N"'
 # Prefer nvim, if installed.
