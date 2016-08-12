@@ -60,6 +60,8 @@ alias ls='ls -AGlh'
 alias tree='tree -Ca'
 # getmod checks the mode of a file, without having to remember stat.
 alias getmod='stat -f "%p %N"'
+# tmux should assume uft8 and 256 colors
+alias tmux='tmux -u2'
 # Prefer nvim, if installed.
 if which nvim > /dev/null; then
     alias vim='nvim'

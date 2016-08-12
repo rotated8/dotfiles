@@ -28,6 +28,9 @@ alias tree='tree -Ca'
 # getmod gets the mode of a file, without having to look up stat.
 alias getmod='stat -f "%p %N"'
 
+# tmux should assume utf8 and 256 colors
+alias tmux='tmux -u2'
+
 # Try to coerce vim usage when an editor is needed.
 export EDITOR=vim
 export VISUAL=gvim
