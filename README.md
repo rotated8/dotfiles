@@ -16,4 +16,4 @@ The .vimrc uses vundle. Install it by running
 
 When using iTerm2, vim-airline needs transparency turned off, text contrast at minimum, and both the ASCII and non-ASCII fonts to support the powerline symbols (and probably the same font, in the end).
 
-For Neovim, link .vim and .vimrc to .nvim and .nvimrc respectively.
+If Neovim is installed, link `~/.vimrc` to `~/.config/nvim/init.vim`. (Check [the neovim wiki](https://github.com/neovim/neovim/wiki/FAQ#where-should-i-put-my-config-vimrc) to make sure this is correct)
