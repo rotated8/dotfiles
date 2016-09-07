@@ -1,4 +1,6 @@
-" I couldn't care less about Vi. This is a nop in nvim.
+" Make sure to link ~/.vimrc to ~/.config/nvim/init.vim, for Neovim.
+
+" I couldn't care less about Vi. (nvim default)
 set nocompatible
 " Modelines may be a security hole.
 set nomodeline
@@ -9,15 +11,14 @@ autocmd!
 " Run the commands below first on a new computer.
 " `git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
 " `vim +PluginInstall +qall`
-" Make sure to link .vim and .vimrc to .nvim and .nvimrc, too.
 filetype off
 set runtimepath+=~/.vim/bundle/Vundle.vim,
 call vundle#begin()
-Plugin 'gmarik/Vundle.vim' " Vundle takes care of itself.
-Plugin 'bling/vim-airline' " A powerline replacement. Makes the bottom pretty.
+Plugin 'gmarik/Vundle.vim' " Load Vundle.
+Plugin 'bling/vim-airline' " A powerline replacement. Makes the bottom line pretty.
 Plugin 'Townk/vim-autoclose' " Closes matched pairs automatically.
 Plugin 'airblade/vim-gitgutter' " In a git repo, show the file's git state in the gutter.
-Plugin 'jnurmine/Zenburn' " Colorscheme. No bleeding-eyes neon.
+Plugin 'jnurmine/Zenburn' " Colorscheme.
 call vundle#end()
 filetype plugin indent on
 
@@ -28,11 +29,11 @@ filetype plugin indent on
 let g:airline_powerline_fonts = 1
 " Explicitly make the terminal colorful. (This shouldn't be necessary. Use -2 with tmux.)
 "set t_Co=256
-" Eliminate redundant message on bottom line.
+" Mode is displayed by airline, so don't show it twice.
 set noshowmode
-" Always show the status line.
+" Always show the status line. (nvim default)
 set laststatus=2
-"
+
 " vim-autoclose Settings
 " Add angle brackets to autoclose for HTML
 autocmd Filetype html,eruby let b:AutoClosePairs_add = '<>'
@@ -42,13 +43,13 @@ let g:gitgutter_diff_args = '-w'
 
 " GUI Settings
 if has('gui_running')
-    set guioptions-=T " No stupid toolbar.
-    set guifont=Vimconsolata:h12 " Best damn font. Included in the dotfile repo.
+    set guioptions-=T " No toolbar.
+    set guifont=Vimconsolata:h12 " Font included in the dotfile repo.
     set showtabline=0 " Never show tab bar. File name is in airline. Use buffers and splits!
 endif
 
 " Windows Settings
-if has("win32") || has("win64")
+if has('win32') || has('win64')
     augroup windows
         autocmd!
         "autocmd GUIEnter * simalt ~x " Fullscreen.
@@ -56,7 +57,8 @@ if has("win32") || has("win64")
 endif
 
 " Tabs are four spaces...
-set expandtab
+set autoindent " Copy indent from current line when starting a new one. (nvim default)
+set expandtab " Never  tabs, always convert to spaces.
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -66,9 +68,10 @@ augroup rubytabs
     autocmd FileType ruby,eruby setlocal tabstop=2 shiftwidth=2 softtabstop=2
 augroup END
 
-" Syntax Highlighting. MUST.
+" Turn syntax highlighting on.
 syntax on
-" Colors via the last plugin above.
+" Use the Zenburn colorscheme we downloaded with Vundle
+" ( Don't complain if it hasn't been downloaded)
 silent! colorscheme zenburn
 " Number lines
 set number
@@ -77,7 +80,7 @@ set colorcolumn=99
 highlight ColorColumn ctermbg=238 guibg=#434443
 " Highlight the line the cursor is on
 set cursorline
-" Make tab completion interactable. On be default in nvim.
+" Make tab completion interactable. (nvim default)
 set wildmenu
 " Don't redraw during macros, and other untyped input.
 set lazyredraw
@@ -87,9 +90,11 @@ set splitright
 set splitbelow
 " Keep five lines at top or bottom of the screen if possible.
 set scrolloff=5
+" If the last line is too long, show as much of it as possible. (nvim default)
+set display=lastline
 " No more annoying file.ext~ backup files!
 set nobackup
-" Allow backspace/delete affect what it likes.
+" Allow backspace/delete affect what it likes.A (nvim default)
 set backspace=indent,eol,start
 " UTF-8 by default.
 set encoding=utf-8
@@ -117,7 +122,7 @@ set visualbell
 " Bad whitespace shows up in red.
 highlight BadWhitespace ctermbg=1 guibg=Red
 " This function will clear bad whitespace highlighting in help files.
-" It is needed because Filetype events fire after BufEnter ones. See below.
+" It is necessary because Filetype events fire after BufEnter ones. See below.
 function! IgnoreHelpFiles()
     if &filetype ==? 'help'
         call clearmatches()
@@ -134,7 +139,9 @@ augroup badwhitespace
     autocmd BufEnter * call IgnoreHelpFiles()
 augroup END
 
-" F1 and arrow keys should not work.
+" Enable the mouse in help files only.
+set mouse=h
+" F1 and arrow keys should not do anything.
 noremap <F1>    <Nop>
 noremap <Up>    <Nop>
 noremap <Down>  <Nop>
@@ -144,6 +151,7 @@ noremap <Right> <Nop>
 nnoremap <S-Up> :ls<CR>
 nnoremap <S-Down> <Nop>
 " Shift-Left and Shift-Right move between buffers in normal mode.
+" Only works if your terminal does not use the same combo to switch tabs.
 nnoremap <S-Left> :bprevious<CR>
 nnoremap <S-Right> :bnext<CR>
 " Make it easy to open and reload this file.
@@ -152,6 +160,6 @@ nnoremap <leader>ev :edit $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 " Make it easy to open the .zshrc file too.
 nnoremap <leader>ez :edit ~/.zshrc<CR>
-" Resize font for blind people.
+" Allow quick font resizing for presentations and colleagues.
 nnoremap <F11> :set guifont=Vimconsolata:h12<CR>
 nnoremap <F12> :set guifont=Vimconsolata:h27<CR>
