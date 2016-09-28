@@ -13,7 +13,7 @@ function parse_git_branch {
     git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ \[\1\]/'
 }
 # Prompt is 'user@host [branch](in red) directory_name$ '
-PS1="\[\033[1;33m\]\s v\V\[\033[0;31m\]\$(parse_git_branch)\[\033[0m\] \W\$ "
+PS1="\[\033[1;33m\]\u@\H\[\033[0;31m\]\$(parse_git_branch)\[\033[0m\] \W\$ "
 
 # Grep should use perl regexps, be recursive, ignore case, and print line numbers. In that order.
 alias g='grep -Prin'
