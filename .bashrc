@@ -40,3 +40,8 @@ if which nvim > /dev/null; then
     alias vim='nvim'
     export EDITOR=nvim
 fi
+
+# Use git bash completion if it exists
+if [ -f ~/git-completion.bash ]; then
+    . ~/git-completion.bash
+fi
