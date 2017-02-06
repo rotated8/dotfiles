@@ -9,6 +9,8 @@
     co = checkout
     up = remote update -p
     amend = commit --amend
+    added = diff -w --cached
+    # files not tracked? git d --no-index before.file after.file
     lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     # delete remote branch = git push remote :branch
 [color]
