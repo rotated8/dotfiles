@@ -8,12 +8,20 @@ set nomodeline
 autocmd!
 
 " Vundle Settings
-" Run the commands below first on a new computer.
-" `git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
-" `vim +PluginInstall +qall`
+" Clone Vundle (https://github.com/VundleVim/Vundle.vim.git) to one of the locations below.
+" Then run `:PluginInstall` or `vim +PluginInstall +qall` from the command line.
 filetype off
-set runtimepath+=~/.vim/bundle/Vundle.vim,
-call vundle#begin()
+if has('nvim')
+    if has('win64') || has('win32')
+        let vundle_path = '$HOME/AppData/Local/nvim/bundle/'
+    else
+        let vundle_path = '~/.config/nvim/bundle/'
+    endif
+else
+    let vundle_path = '~/.vim/bundle/'
+endif
+let &runtimepath .= ',' . vundle_path . 'Vundle.vim/'
+call vundle#begin(vundle_path)
 Plugin 'gmarik/Vundle.vim' " Load Vundle.
 Plugin 'bling/vim-airline' " A powerline replacement. Makes the bottom line pretty.
 Plugin 'Townk/vim-autoclose' " Closes matched pairs automatically.
@@ -44,7 +52,7 @@ let g:gitgutter_diff_args = '-w'
 " GUI Settings
 if has('gui_running')
     set guioptions-=T " No toolbar.
-    set guifont=Vimconsolata:h12 " Font included in the dotfile repo.
+    set guifont=Vimconsolata:h10 " Font included in the dotfile repo.
     set showtabline=0 " Never show tab bar. File name is in airline. Use buffers and splits!
 endif
 
@@ -161,5 +169,5 @@ nnoremap <leader>sv :source $MYVIMRC<CR>
 " Make it easy to open the .zshrc file too.
 nnoremap <leader>ez :edit ~/.zshrc<CR>
 " Allow quick font resizing for presentations and colleagues.
-nnoremap <F11> :set guifont=Vimconsolata:h12<CR>
+nnoremap <F11> :set guifont=Vimconsolata:h10<CR>
 nnoremap <F12> :set guifont=Vimconsolata:h27<CR>
