@@ -8,11 +8,7 @@ I've made an effort to make everything work across Linux, Mac, and Windows, but 
 
 The .zshrc requires [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh).
 
-The .vimrc uses vundle. Install it by running
-
-``git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim``
-
-``vim +PluginInstall +qall``
+The .vimrc uses vundle. Installation instructions are in the .vimrc file. Use `head -n 20 ./.vimrc` to read them.
 
 When using iTerm2, vim-airline needs transparency turned off, text contrast at minimum, and both the ASCII and non-ASCII fonts to support the powerline symbols (and probably the same font, in the end).
 

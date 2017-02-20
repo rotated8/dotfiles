@@ -1,5 +1,3 @@
-" Make sure to link ~/.vimrc to ~/.config/nvim/init.vim, for Neovim.
-
 " I couldn't care less about Vi. (nvim default)
 set nocompatible
 " Modelines may be a security hole.
@@ -8,6 +6,7 @@ set nomodeline
 autocmd!
 
 " Vundle Settings
+" Make sure to link ~/.vimrc to ~/.config/nvim/init.vim, for Neovim.
 " Clone Vundle (https://github.com/VundleVim/Vundle.vim.git) to one of the locations below.
 " Then run `:PluginInstall` or `vim +PluginInstall +qall` from the command line.
 filetype off
@@ -51,9 +50,12 @@ let g:gitgutter_diff_args = '-w'
 
 " GUI Settings
 if has('gui_running')
-    set guioptions-=T " No toolbar.
-    set guifont=Vimconsolata:h10 " Font included in the dotfile repo.
-    set showtabline=0 " Never show tab bar. File name is in airline. Use buffers and splits!
+    " No toolbar.
+    set guioptions-=T
+    " Font included in https://github.com/rotated8/dotfiles
+    set guifont=Vimconsolata:h10
+    " Never show tab bar. File name is in airline. Use buffers and splits!
+    set showtabline=0
 endif
 
 " Windows Settings
@@ -64,9 +66,11 @@ if has('win64') || has('win32')
     augroup END
 endif
 
+" Copy indent from current line when starting a new one. (nvim default)
+set autoindent
+" Never  tabs, always convert to spaces.
+set expandtab
 " Tabs are four spaces...
-set autoindent " Copy indent from current line when starting a new one. (nvim default)
-set expandtab " Never  tabs, always convert to spaces.
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -79,7 +83,7 @@ augroup END
 " Turn syntax highlighting on.
 syntax on
 " Use the Zenburn colorscheme we downloaded with Vundle
-" ( Don't complain if it hasn't been downloaded)
+" (Don't complain if it hasn't been downloaded)
 silent! colorscheme zenburn
 " Number lines
 set number
@@ -102,7 +106,7 @@ set scrolloff=5
 set display=lastline
 " No more annoying file.ext~ backup files!
 set nobackup
-" Allow backspace/delete affect what it likes.A (nvim default)
+" Allow backspace/delete affect what it likes. (nvim default)
 set backspace=indent,eol,start
 " UTF-8 by default.
 set encoding=utf-8
