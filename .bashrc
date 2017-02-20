@@ -18,7 +18,7 @@ alias g='grep -Prin'
 
 # ls Should list everything except '.' and '..' in long form, and have color.
 export LSCOLORS='dxfxcxdxbxegedabagacad' # Directories are NOT dark blue.
-alias ls='ls -AGlh'
+alias ls='ls -Alh'
 
 # tree should act like ls
 alias tree='tree -Ca'
