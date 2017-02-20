@@ -97,7 +97,7 @@ set number
 set textwidth=110
 " Lightly highlight column 99
 set colorcolumn=99
-highlight ColorColumn ctermbg=238 guibg=#434443
+highlight ColorColumn ctermbg=238 guibg=#444444
 " Highlight the line the cursor is on
 set cursorline
 " Make tab completion interactable. (nvim default)
