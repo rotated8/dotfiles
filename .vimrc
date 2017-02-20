@@ -57,7 +57,7 @@ if has('gui_running')
 endif
 
 " Windows Settings
-if has('win32') || has('win64')
+if has('win64') || has('win32')
     augroup windows
         autocmd!
         "autocmd GUIEnter * simalt ~x " Fullscreen.
