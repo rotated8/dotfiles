@@ -1,9 +1,7 @@
 # .bashrc
 
 # Source global definitions
-if [ -f /etc/bashrc ]; then
-    . /etc/bashrc
-fi
+test -f /etc/bashrc && . /etc/bashrc
 
 # User specific aliases and functions
 ################################################################################
@@ -36,12 +34,10 @@ export EDITOR=vim
 export VISUAL=gvim
 
 # Prefer nvim if installed
-if which nvim > /dev/null; then
+if which nvim 2> /dev/null; then
     alias vim='nvim'
     export EDITOR=nvim
 fi
 
 # Use git bash completion if it exists
-if [ -f ~/git-completion.bash ]; then
-    . ~/git-completion.bash
-fi
+test -f ~/git-completion.bash && . ~/git-completion.bash
