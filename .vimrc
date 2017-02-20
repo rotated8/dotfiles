@@ -67,7 +67,8 @@ endif
 if has('win64') || has('win32')
     augroup windows
         autocmd!
-        "autocmd GUIEnter * simalt ~x " Fullscreen.
+        " Fullscreen.
+        "autocmd GUIEnter * simalt ~x
     augroup END
 endif
 
@@ -134,7 +135,8 @@ set matchpairs +=`:`
 " NO BELLS
 set noerrorbells
 set visualbell
-"set vb t_vb= " Removes any bell.
+" Removes any bell.
+"set vb t_vb=
 
 " Bad whitespace shows up in red.
 highlight BadWhitespace ctermbg=1 guibg=Red
