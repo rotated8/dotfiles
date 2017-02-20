@@ -48,7 +48,7 @@ set laststatus=2
 
 " vim-autoclose Settings
 " Add angle brackets to autoclose for HTML
-autocmd Filetype html,eruby let b:AutoClosePairs_add = '<>'
+autocmd Filetype html,xml,eruby let b:AutoClosePairs_add = '<>'
 
 " vim-gitgutter Settings.
 let g:gitgutter_diff_args = '-w'
