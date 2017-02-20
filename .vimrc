@@ -93,6 +93,8 @@ syntax on
 silent! colorscheme zenburn
 " Number lines
 set number
+" Don't wrap lines until column 110
+set textwidth=110
 " Lightly highlight column 99
 set colorcolumn=99
 highlight ColorColumn ctermbg=238 guibg=#434443
