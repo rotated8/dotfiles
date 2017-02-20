@@ -21,11 +21,16 @@ else
 endif
 let &runtimepath .= ',' . vundle_path . 'Vundle.vim/'
 call vundle#begin(vundle_path)
-Plugin 'gmarik/Vundle.vim' " Load Vundle.
-Plugin 'bling/vim-airline' " A powerline replacement. Makes the bottom line pretty.
-Plugin 'Townk/vim-autoclose' " Closes matched pairs automatically.
-Plugin 'airblade/vim-gitgutter' " In a git repo, show the file's git state in the gutter.
-Plugin 'jnurmine/Zenburn' " Colorscheme.
+" Load Vundle.
+Plugin 'VundleVim/Vundle.vim'
+" A powerline replacement. Makes the bottom line pretty.
+Plugin 'vim-airline/vim-airline'
+" Closes matched pairs automatically.
+Plugin 'Townk/vim-autoclose'
+" In a git repo, show the file's git state in the gutter.
+Plugin 'airblade/vim-gitgutter'
+" Colorscheme.
+Plugin 'jnurmine/Zenburn'
 call vundle#end()
 filetype plugin indent on
 
