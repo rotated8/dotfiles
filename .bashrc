@@ -34,7 +34,7 @@ export EDITOR=vim
 export VISUAL=gvim
 
 # Prefer nvim if installed
-if which nvim 2> /dev/null; then
+if which nvim 1> /dev/null 2> /dev/null; then
     alias vim='nvim'
     export EDITOR=nvim
 fi
