@@ -6,6 +6,11 @@ test -f /etc/bashrc && . /etc/bashrc
 # User specific aliases and functions
 ################################################################################
 
+# Append to history file instead of overwriting it.
+shopt -s histappend
+# Check the window size after every command
+shopt -s checkwinsize
+
 # Parse out the branch we're on, or return an empty string. Errors are ignored.
 function parse_git_branch {
     git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ \[\1\]/'
