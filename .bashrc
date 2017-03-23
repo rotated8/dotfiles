@@ -41,3 +41,12 @@ fi
 
 # Use git bash completion if it exists
 test -f ~/git-completion.bash && . ~/git-completion.bash
+
+# Use rbenv if it is installed
+# rbenv can be installed with `git clone https://github.com/rbenv/rbenv ~/.rbenv`
+# ruby-build is necessary to build and install ruby versions. It can be installed with
+# `git clone https://github.com/rbenv/ruby-build ~/.rbenv/plugins/ruby-build`
+if [[ -d ~/.rbenv/ ]]; then
+    export PATH="$PATH:$HOME/.rbenv/bin"
+    eval "$(rbenv init -)"
+fi
