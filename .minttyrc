@@ -12,11 +12,11 @@ BoldCyan=255,215,0
 White=245,222,179
 
 BoldAsFont=-1
-Columns=117
-Rows=67
-Font=Inconsolata-dz-pl
-FontHeight=10
-FontWeight=500
+Columns=134
+Rows=56
+Font=Iosevka
+FontHeight=11
+FontWeight=400
 AllowBlinking=yes
 Locale=C
 Charset=UTF-8

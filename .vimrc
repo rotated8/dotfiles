@@ -21,16 +21,11 @@ else
 endif
 let &runtimepath .= ',' . vundle_path . 'Vundle.vim/'
 call vundle#begin(vundle_path)
-" Load Vundle.
-Plugin 'VundleVim/Vundle.vim'
-" A powerline replacement. Makes the bottom line pretty.
-Plugin 'vim-airline/vim-airline'
-" Closes matched pairs automatically.
-Plugin 'Townk/vim-autoclose'
-" In a git repo, show the file's git state in the gutter.
-Plugin 'airblade/vim-gitgutter'
-" Colorscheme.
-Plugin 'jnurmine/Zenburn'
+Plugin 'VundleVim/Vundle.vim' " Load Vundle.
+Plugin 'vim-airline/vim-airline' " A powerline replacement. Makes the bottom line pretty.
+Plugin 'Townk/vim-autoclose' " Closes matched pairs automatically.
+Plugin 'airblade/vim-gitgutter' " In a git repo, show the file's git state in the gutter.
+Plugin 'jnurmine/Zenburn' " Colorscheme.
 call vundle#end()
 filetype plugin indent on
 
@@ -55,28 +50,24 @@ let g:gitgutter_diff_args = '-w'
 
 " GUI Settings
 if has('gui_running')
-    " No toolbar.
-    set guioptions-=T
-    " Font included in https://github.com/rotated8/dotfiles
-    set guifont=Vimconsolata:h10
-    " Never show tab bar. File name is in airline. Use buffers and splits!
-    set showtabline=0
+    set guioptions-=T " No toolbar.
+    " Fonts included in https://github.com/rotated8/dotfiles
+    "set guifont=Vimconsolata:h10
+    set guifont=Iosevka:h10:cANSI:qDRAFT
+    set showtabline=0 " Never show tab bar. File name is in airline. Use buffers and splits!
 endif
 
 " Windows Settings
 if has('win64') || has('win32')
     augroup windows
         autocmd!
-        " Fullscreen.
-        "autocmd GUIEnter * simalt ~x
+        "autocmd GUIEnter * simalt ~x " Fullscreen.
     augroup END
 endif
 
-" Copy indent from current line when starting a new one. (nvim default)
-set autoindent
-" Never  tabs, always convert to spaces.
-set expandtab
 " Tabs are four spaces...
+set autoindent " Copy indent from current line when starting a new one. (nvim default)
+set expandtab " Never  tabs, always convert to spaces.
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -93,8 +84,8 @@ syntax on
 silent! colorscheme zenburn
 " Number lines
 set number
-" Don't wrap lines until column 110
-set textwidth=110
+" Do't wrap lines until column 111
+set textwidth=111
 " Lightly highlight column 99
 set colorcolumn=99
 highlight ColorColumn ctermbg=238 guibg=#444444
@@ -137,8 +128,7 @@ set matchpairs +=`:`
 " NO BELLS
 set noerrorbells
 set visualbell
-" Removes any bell.
-"set vb t_vb=
+"set vb t_vb= " Removes any bell.
 
 " Bad whitespace shows up in red.
 highlight BadWhitespace ctermbg=1 guibg=Red
