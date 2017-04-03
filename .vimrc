@@ -174,5 +174,7 @@ nnoremap <leader>ez :edit ~/.zshrc<CR>
 nnoremap <leader>eb :edit ~/.bashrc<CR>
 nnoremap <leader>eg :edit ~/.gitconfig<CR>
 " Allow quick font resizing for presentations and colleagues.
-nnoremap <F11> :set guifont=Vimconsolata:h10<CR>
-nnoremap <F12> :set guifont=Vimconsolata:h27<CR>
+"nnoremap <F11> :set guifont=Vimconsolata:h10<CR>
+nnoremap <F11> :set guifont=Iosevka:h10:cANSI:qDRAFT<CR>
+"nnoremap <F12> :set guifont=Vimconsolata:h27<CR>
+nnoremap <F12> :set guifont=Iosevka:h27:cANSI:qDRAFT<CR>
