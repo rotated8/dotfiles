@@ -44,6 +44,11 @@ if which nvim 1> /dev/null 2> /dev/null; then
     export EDITOR=nvim
 fi
 
+# Prefer Python3 in virtualenvs, if installed
+if which python3 1> /dev/null 2> /dev/null; then
+    export VIRTUALENV_PYTHON=python3
+fi
+
 # Use git bash completion if it exists
 test -f ~/git-completion.bash && . ~/git-completion.bash
 
