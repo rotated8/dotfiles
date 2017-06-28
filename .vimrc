@@ -6,7 +6,7 @@ set nomodeline
 autocmd!
 
 " Vundle Settings
-" Make sure to link ~/.vimrc to ~/.config/nvim/init.vim, for Neovim.
+" 2017/06/28: Make sure to link ~/.vimrc to ~/.config/nvim/init.vim, for Neovim.
 " Clone Vundle (https://github.com/VundleVim/Vundle.vim.git) to one of the locations below.
 " Then run `:PluginInstall` or `vim +PluginInstall +qall` from the command line.
 filetype off
