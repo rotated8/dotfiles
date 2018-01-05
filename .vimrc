@@ -12,14 +12,14 @@ autocmd!
 filetype off
 if has('nvim')
     if has('win64') || has('win32')
-        let vundle_path = '$HOME/AppData/Local/nvim/bundle/'
+        let vundle_path = '$HOME/AppData/Local/nvim/bundle/Vundle.vim'
     else
-        let vundle_path = '~/.config/nvim/bundle/'
+        let vundle_path = '~/.config/nvim/bundle/Vundle.vim'
     endif
 else
-    let vundle_path = '~/.vim/bundle/'
+    let vundle_path = '~/.vim/bundle/Vundle.vim'
 endif
-let &runtimepath .= ',' . vundle_path . 'Vundle.vim/'
+let &runtimepath .= ',' . vundle_path
 call vundle#begin(vundle_path)
 Plugin 'VundleVim/Vundle.vim' " Load Vundle.
 Plugin 'vim-airline/vim-airline' " A powerline replacement. Makes the bottom line pretty.
