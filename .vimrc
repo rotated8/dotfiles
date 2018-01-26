@@ -25,6 +25,7 @@ Plugin 'VundleVim/Vundle.vim' " Load Vundle.
 Plugin 'vim-airline/vim-airline' " A powerline replacement. Makes the bottom line pretty.
 Plugin 'Townk/vim-autoclose' " Closes matched pairs automatically.
 Plugin 'airblade/vim-gitgutter' " In a git repo, show the file's git state in the gutter.
+Plugin 'w0rp/ale' " Automatically lint files.
 Plugin 'jnurmine/Zenburn' " Colorscheme.
 call vundle#end()
 filetype plugin indent on
@@ -40,6 +41,8 @@ let g:airline_powerline_fonts = 1
 set noshowmode
 " Always show the status line. (nvim default)
 set laststatus=2
+" Show ALE errors and warnings
+let g:airline#extensions#ale#enabled = 1
 
 " vim-autoclose Settings
 " Add angle brackets to autoclose for HTML
