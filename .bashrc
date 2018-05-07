@@ -20,6 +20,11 @@ PS1="\[\033[1;33m\]\u@\H\[\033[0;31m\]\$(parse_git_branch)\[\033[0m\] \W\$ "
 
 # Grep should use perl regexps, be recursive, ignore case, and print line numbers. In that order.
 alias g='grep -Prin'
+# Use ripgrep, if installed. https://github.com/BurntSushi/ripgrep
+if which rg 1> /dev/null 2>/dev/null; then
+    alias grep='rg'
+    alias g='rg -in'
+fi
 
 # ls Should list everything except '.' and '..' in long form, and have color.
 export LSCOLORS='dxfxcxdxbxegedabagacad' # Directories are NOT dark blue.
