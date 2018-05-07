@@ -38,7 +38,7 @@ alias tmux='tmux -u2'
 export EDITOR=vim
 export VISUAL=gvim
 
-# Prefer nvim if installed
+# Prefer nvim if installed. https://neovim.io/
 if which nvim 1> /dev/null 2> /dev/null; then
     alias vim='nvim'
     export EDITOR=nvim
