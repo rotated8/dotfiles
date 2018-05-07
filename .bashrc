@@ -65,3 +65,17 @@ if [[ -d ~/.rbenv/ ]]; then
     export PATH="$PATH:$HOME/.rbenv/bin"
     eval "$(rbenv init -)"
 fi
+
+# Detect WSL
+if grep -q "Microsoft" /proc/version; then
+    # Configure Vagrant. More info: https://www.vagrantup.com/docs/other/wsl.html
+    export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
+
+    # Make it easy to change to my Windows home if I'm not already there.
+    if [[ $PWD != "/mnt/*" ]]; then
+        # In future, try https://docs.microsoft.com/en-us/windows/wsl/interop#share-environment-variables-between-windows-and-wsl
+        win_home=$(cmd.exe /C echo %UserProfile%)
+        wsl_home=$(echo "$win_home" | sed -re 's/:?\\/\//g' -e 's/^C/\/mnt\/c/' -e 's/\r?\n?$/\/workspace\//g')
+        alias home='cd "$wsl_home"'
+    fi
+fi
