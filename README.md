@@ -1,20 +1,56 @@
 Dotfiles
 ========
 
-My configuration files.
+This repository is the one thing I have worked on for my entire career.
 
-This is one of the first things I copy onto a new computer.
-I've made an effort to make everything work across Linux, Mac, and Windows, but the shell configs may not work
-on your preferred OS without tweaking.
+My current environment of choice is bash from Ubuntu on Windows, using WSL, with Vagrant and Virtualbox for the
+(preferably Debian-like) development environments. I like Neovim, or regular Vim, for editing, Tmux, and git.
+I've tried screen and SVN, but never used them enough to develop configuration for them.
 
-The .zshrc requires [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh).
+Notes
+-----
 
-The .vimrc uses vundle. Installation instructions are in the .vimrc file. Use `head -n 20 ./.vimrc` to read them.
+The `.vimrc` uses vundle. Installation instructions are in the .vimrc file. `head -n 20 ./.vimrc` is an easy way to read them.
 
-When using iTerm2, vim-airline needs transparency turned off, text contrast at minimum, and both the ASCII and non-ASCII fonts to support the powerline symbols (and probably the same font, in the end).
-
-If Neovim is installed, link `~/.vimrc` to `~/.config/nvim/init.vim`. (Check [the neovim wiki](https://github.com/neovim/neovim/wiki/FAQ#where-should-i-put-my-config-vimrc) to make sure this is correct)
+If Neovim is installed, link `~/.vimrc` to `~/.config/nvim/init.vim`. (Check [the Neovim wiki](https://github.com/neovim/neovim/wiki/FAQ#where-should-i-put-my-config-vimrc) to make sure this is correct)
 
 Two fonts are included: [Iosevka](https://be5invis.github.io/Iosevka/), version 1.12.2, and Vimconsolata, a
 patched version of [Inconsolata](http://levien.com/type/myfonts/inconsolata.html) (version unknown). Iosevka
 works better with vim-airline, and is used by default in the .vimrc and .minttyrc.
+
+Links
+-----
+
+I've broken this section into two categories. First are links for things that I need to manually download and
+install when setting up a new system.
+
+- [Neovim](https://neovim.io/) - A performant, modern version of Vim.
+- [ripgrep](https://github.com/BurntSushi/ripgrep) - Grep, but written in Rust, with a slightly different
+  feature set. Benchmarks suggest it is faster.
+- [Vagrant](https://www.vagrantup.com/) - A commandline tool for creating and managing virtual environments.
+- [Virtualbox](https://www.virtualbox.org/) - Used by Vagrant, Virtualbox does the heavy lifting for my virtual
+  environments,
+
+The other group is links for documentation.
+
+- [Neovim](https://neovim.io/doc/user/) - This is specifically for Neovim. Classic vim docs are
+  [here](http://vimdoc.sourceforge.net/htmldoc/).
+- [Tmux](https://github.com/tmux/tmux) - While this isn't documentation per se, I llike having this link
+  around.
+- [Git](https://git-scm.com/doc) - In. Value. Able. Can be searched from DuckDuckGo with `!git-scm`
+- [WSL](https://docs.microsoft.com/en-us/windows/wsl/about) - The interoperability and user account sections
+  have been quite helpful.
+- [Bash](http://tldp.org/LDP/abs/html/) - I wouldn't have a career without this guide. It routinely answers
+  questions I have forgotten.
+
+Deprecated
+----------
+
+Some items here I no longer use regularly. Many of them are from a time when I was working on Macs.
+
+The `.zshrc` requires [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh), but I've switched back to Bash, so
+this does not have feature parity with `.bashrc`.
+
+When using iTerm2, vim-airline needs transparency turned off, text contrast at minimum, and both the ASCII and
+non-ASCII fonts to support the powerline symbols (and probably the same font, in the end).
+
