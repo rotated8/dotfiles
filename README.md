@@ -48,9 +48,6 @@ Deprecated
 
 Some items here I no longer use regularly. Many of them are from a time when I was working on Macs.
 
-The `.zshrc` requires [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh), but I've switched back to Bash, so
-this does not have feature parity with `.bashrc`.
-
 When using iTerm2, vim-airline needs transparency turned off, text contrast at minimum, and both the ASCII and
 non-ASCII fonts to support the powerline symbols (and probably the same font, in the end).
 
