@@ -15,8 +15,6 @@
     # delete remote branch = git push remote :branch
 [color]
     ui = auto
-[core]
-    editor = vim
 [diff]
     algorithm = patience
 [fetch]

@@ -42,6 +42,7 @@ alias tmux='tmux -u2'
 # Try to coerce vim usage when an editor is needed.
 export EDITOR=vim
 export VISUAL=gvim
+export GIT_EDITOR=vim
 # Install Vundle if it is missing, and a .vimrc exists.
 if [[ -e ~/.vimrc && ! -d ~/.vim/bundle/Vundle.vim ]]; then
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
@@ -50,6 +51,7 @@ fi
 if which nvim 1> /dev/null 2> /dev/null; then
     alias vim='nvim'
     export EDITOR=nvim
+    export GIT_EDITOR=nvim
 
     # Link the vimrc, if it exists
     if [[ -f ~/.vimrc && ! -e ~/.config/nvim/init.vim ]]; then
