@@ -4,7 +4,7 @@ set -o errexit -o pipefail -o nounset -o xtrace
 
 # Set path to dot files
 if [[ -n "$1" && -d "$1" ]]; then
-    dot_file_dir=$1
+    dot_file_dir="$1"
 elif [[ -d "${HOME}/dotfiles" ]]; then
     dot_file_dir="${HOME}/dotfiles"
 else
@@ -49,10 +49,8 @@ if [[ -e "${HOME}/.vimrc" ]]; then
         fi
     fi
 
-    # Install Vim plugins
-    set -i
-    vim +PluginInstall +qall
-    set +i
+    # Plugins still need to be installed.
+    echo "Install plugins with \`vim +PluginInstall +qall\`"
 else
     echo "Missing .vimrc"
 fi
