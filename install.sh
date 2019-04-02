@@ -4,9 +4,9 @@ set -o errexit -o pipefail -o nounset -o xtrace
 
 # Set path to dot files
 if [[ -n "$1" && -d "$1" ]]; then
-    dot_file_dir = $1
+    dot_file_dir=$1
 elif [[ -d "${HOME}/dotfiles" ]]; then
-    dot_file_dir = "${HOME}/dotfiles"
+    dot_file_dir="${HOME}/dotfiles"
 else
     echo "Could not find a directory to copy the dotfiles from. Try passing a path to this script."
     exit 1
