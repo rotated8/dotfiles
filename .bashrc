@@ -117,4 +117,5 @@ if grep -q "Microsoft" /proc/version; then
     fi
 
     unset env
+    # End copied script
 fi
