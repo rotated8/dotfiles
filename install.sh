@@ -21,13 +21,6 @@ for dotfile in ".vimrc" ".bashrc" ".inputrc" ".gitconfig" ".tmux.conf" "git-comp
     fi
 done
 
-# Pull in new .bashrc
-if [[ -f "${HOME}/.bashrc" ]]; then
-    . "${HOME}/.bashrc"
-else
-    echo "Missing .bashrc"
-fi
-
 # Set up Vim
 if [[ -e "${HOME}/.vimrc" ]]; then
     # Install Vundle if it is missing.
