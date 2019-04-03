@@ -25,7 +25,9 @@ Plugin 'VundleVim/Vundle.vim' " Load Vundle.
 Plugin 'vim-airline/vim-airline' " A powerline replacement. Makes the bottom line pretty.
 Plugin 'Townk/vim-autoclose' " Closes matched pairs automatically.
 Plugin 'airblade/vim-gitgutter' " In a git repo, show the file's git state in the gutter.
-Plugin 'w0rp/ale' " Automatically lint files.
+if has('nvim') || (v:version >= 800) " Ale errors on install for Vim 7.4- the Ubuntu 16.04 default
+    Plugin 'w0rp/ale' " Automatically lint files.
+endif
 Plugin 'jnurmine/Zenburn' " Colorscheme.
 call vundle#end()
 filetype plugin indent on
