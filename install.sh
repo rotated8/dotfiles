@@ -35,6 +35,10 @@ if [[ -e "${HOME}/.vimrc" ]]; then
         git clone https://github.com/VundleVim/Vundle.vim.git "${HOME}/.vim/bundle/Vundle.vim"
     fi
 
+    # Install plugins
+    # -E = Start in Ex mode. -s = Silent. -S = Source this file (since -E won't do it)
+    vim -EsS "${HOME}/.vimrc" +PluginInstall +qall 1> /dev/null 2> /dev/null
+
     # Set up nvim if installed. https://neovim.io/
     if which nvim 1> /dev/null 2> /dev/null; then
         # Link the vimrc, if it is missing
@@ -47,10 +51,11 @@ if [[ -e "${HOME}/.vimrc" ]]; then
         if [[ ! -d "${HOME}/.config/nvim/bundle/Vundle.vim" ]]; then
             git clone https://github.com/VundleVim/Vundle.vim.git "${HOME}/.config/nvim/bundle/Vundle.vim"
         fi
+
+        # Plugins still need to be installed
+        vim -EsS "${HOME}/.config/nvim/init.vim" +PluginInstall +qall 1> /dev/null 2> /dev/null
     fi
 
-    # Plugins still need to be installed.
-    echo "Install plugins with \`vim +PluginInstall +qall\`"
 else
     echo "Missing .vimrc"
 fi
