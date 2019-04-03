@@ -3,7 +3,7 @@
 set -o errexit -o pipefail -o nounset
 
 # Set path to dot files
-if [[ -n "$1" && -d "$1" ]]; then
+if [[ $# -eq 1 && -n "$1" && -d "$1" ]]; then
     dot_file_dir="$1"
 elif [[ -d "${HOME}/dotfiles" ]]; then
     dot_file_dir="${HOME}/dotfiles"
