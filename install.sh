@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Exit at first failure, return failures from pipes, don't allow unset vars, and expand and echo commands
-set -o errexit -o pipefail -o nounset -o xtrace
+# Exit at first failure, return failures from pipes, and don't allow unset vars
+set -o errexit -o pipefail -o nounset
 
 # Set path to dot files
 if [[ -n "$1" && -d "$1" ]]; then
