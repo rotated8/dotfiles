@@ -53,7 +53,7 @@ if [[ -e "${HOME}/.vimrc" ]]; then
         fi
 
         # Plugins still need to be installed
-        vim -EsS "${HOME}/.config/nvim/init.vim" +PluginInstall +qall 1> /dev/null 2> /dev/null
+        nvim -EsS "${HOME}/.config/nvim/init.vim" +PluginInstall +qall 1> /dev/null 2> /dev/null
     fi
 
 else
