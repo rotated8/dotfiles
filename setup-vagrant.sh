@@ -39,7 +39,7 @@ gem install --force bundler
 
 # Install package dependencies
 sudo apt-get install -y libmysqlclient-dev libsqlite3-dev libpq-dev
-sudo apt-get install -y redis-server postgresql chromium-browser openjdk-8-jre
+sudo apt-get install -y redis-server postgresql chromium-browser chromium-chromedriver openjdk-8-jre
 
 # Install Node 8
 curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
