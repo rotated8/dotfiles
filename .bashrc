@@ -1,7 +1,7 @@
 # .bashrc
 
 # Source global definitions.
-test -f /etc/bashrc && . /etc/bashrc
+test -f /etc/bash.bashrc && . /etc/bash.bashrc
 
 # User specific aliases and functions.
 ################################################################################
@@ -68,6 +68,33 @@ if [[ -d ~/.rbenv/ ]]; then
     eval "$(rbenv init -)"
 fi
 
+# 2019/01/24: Automatically start ssh-agent, via
+# https://help.github.com/articles/working-with-ssh-key-passphrases/#auto-launching-ssh-agent-on-git-for-windows
+env=~/.ssh/agent.env
+
+agent_load_env () {
+    test ! -d "$HOME/.ssh" && mkdir -p "$HOME/.ssh"
+    test -f "$env" && . "$env" >| /dev/null ; }
+
+agent_start () {
+    (umask 077; ssh-agent >| "$env")
+    . "$env" >| /dev/null ; }
+
+agent_load_env
+
+# agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2=agent not running
+agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
+
+if [[ ! "$SSH_AUTH_SOCK" || $agent_run_state = 2 ]]; then
+    agent_start
+    ssh-add
+elif [[ "$SSH_AUTH_SOCK" && $agent_run_state = 1 ]]; then
+    ssh-add
+fi
+
+unset env
+# End copied script
+
 # Detect WSL.
 if grep -q "Microsoft" /proc/version; then
     # Configure Vagrant. More info: https://www.vagrantup.com/docs/other/wsl.html
@@ -80,29 +107,4 @@ if grep -q "Microsoft" /proc/version; then
         wsl_home=$(echo "$win_home" | sed -re 's/:?\\/\//g' -e 's/^C/\/mnt\/c/' -e 's/\r?\n?$/\/workspace\//g')
         alias home='cd "$wsl_home"'
     fi
-
-    # 2019/01/24: Automatically start ssh-agent, via
-    # https://help.github.com/articles/working-with-ssh-key-passphrases/#auto-launching-ssh-agent-on-git-for-windows
-    env=~/.ssh/agent.env
-
-    agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
-
-    agent_start () {
-        (umask 077; ssh-agent >| "$env")
-        . "$env" >| /dev/null ; }
-
-    agent_load_env
-
-    # agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2=agent not running
-    agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
-
-    if [[ ! "$SSH_AUTH_SOCK" || $agent_run_state = 2 ]]; then
-        agent_start
-        ssh-add
-    elif [[ "$SSH_AUTH_SOCK" && $agent_run_state = 1 ]]; then
-        ssh-add
-    fi
-
-    unset env
-    # End copied script
 fi
