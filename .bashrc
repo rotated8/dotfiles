@@ -70,7 +70,7 @@ fi
 
 # 2019/01/24: Automatically start ssh-agent, via
 # https://help.github.com/articles/working-with-ssh-key-passphrases/#auto-launching-ssh-agent-on-git-for-windows
-env=~/.ssh/agent.env
+env="$HOME/.ssh/agent.env"
 
 agent_load_env () {
     test ! -d "$HOME/.ssh" && mkdir -parents -mode=600 "$HOME/.ssh"
