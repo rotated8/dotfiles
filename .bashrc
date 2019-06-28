@@ -73,7 +73,7 @@ fi
 env=~/.ssh/agent.env
 
 agent_load_env () {
-    test ! -d "$HOME/.ssh" && mkdir -p "$HOME/.ssh"
+    test ! -d "$HOME/.ssh" && mkdir -parents -mode=600 "$HOME/.ssh"
     test -f "$env" && . "$env" >| /dev/null ; }
 
 agent_start () {
