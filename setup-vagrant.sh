@@ -31,9 +31,10 @@ git clone https://github.com/rotated8/dotfiles "${dot_files_dir}"
 
 # Source the .bashrc, if it exists, to get rbenv working.
 if [[ -e "${HOME}/.bashrc" ]]; then
-    set +o xtrace +o nounset # Don't trace this, and Ubuntu's bash.bashrc has unset vars...
+    # The my .bashrc can't handle errexit (ssh helper tests), and Ubuntu's can't handle nounset (??).
+    set +o errexit +o nounset
     . "${HOME}/.bashrc"
-    set -o xtrace -o nounset
+    set -o errexit -o nounset
 fi
 
 # Install Ruby 2.5.3
