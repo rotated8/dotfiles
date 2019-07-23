@@ -15,8 +15,23 @@ shopt -s checkwinsize
 function parse_git_branch {
     git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ \[\1\]/'
 }
-# Prompt is 'user@host [branch](in red) directory_name$ '.
-PS1="\[\033[1;33m\]\u@\H\[\033[0;31m\]\$(parse_git_branch)\[\033[0m\] \W\$ "
+# If AWS credentials have been updated in the last 12 hours, TKI is probably ok.
+CHECK_TKI='false'
+function tki_status {
+    if [[ -e "$HOME/.aws/credentials" && $CHECK_TKI == 'true' ]]; then
+        date_format="%Y%m%d%H%M%S" # Reduces time to a comparable number, not epoch dependant.
+        mod_time=$(date --reference="$HOME/.aws/credentials") # Time AWS creds were modified.
+        expire_time=$(date --date="$mod_time + 43200 seconds" +"$date_format") # Add 12 hours.
+
+        if [[ "$expire_time" -ge "$(date +$date_format)" ]]; then
+            echo -e '\033[0;32mTKI:✓ ' # Green
+        else
+            echo -e '\033[0;31mTKI:× ' # Red
+        fi
+    fi
+}
+# Prompt is '[TKI] user@host [branch](in red) directory_name$ '.
+PS1="\$(tki_status)\[\033[1;33m\]\u@\H\[\033[0;31m\]\$(parse_git_branch)\[\033[0m\] \W\$ "
 
 # Grep should use perl regexps, be recursive, ignore case, and print line numbers. In that order.
 alias g='grep -Prin'
