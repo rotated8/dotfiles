@@ -55,6 +55,8 @@ alias tree='tree -Ca'
 
 # getmod gets the mode of a file, without having to look up stat.
 alias getmod='stat -f "%p %N"'
+# getown get the owner and group of a file, without having to look up stat
+alias getown='stat -f "%u %g"'
 
 # tmux should assume utf8 and 256 colors.
 alias tmux='tmux -u2'
