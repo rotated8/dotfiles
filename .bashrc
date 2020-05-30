@@ -92,10 +92,11 @@ fi
 
 # 2019/01/24: Automatically start ssh-agent, via
 # https://help.github.com/articles/working-with-ssh-key-passphrases/#auto-launching-ssh-agent-on-git-for-windows
+test ! -d "$HOME/.ssh" && mkdir --parents --mode=700 "$HOME/.ssh"
+# Begin copied script
 env="$HOME/.ssh/agent.env"
 
 agent_load_env () {
-    test ! -d "$HOME/.ssh" && mkdir --parents --mode=700 "$HOME/.ssh"
     test -f "$env" && . "$env" >| /dev/null ; }
 
 agent_start () {
