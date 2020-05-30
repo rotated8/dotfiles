@@ -90,10 +90,12 @@ if [[ -d ~/.rbenv/ ]]; then
     eval "$(rbenv init -)"
 fi
 
+# Ensure the ~/.ssh dir exists, and is only usable by me.
+test ! -d "$HOME/.ssh" && mkdir --parents --mode=700 "$HOME/.ssh"
+# Tangentially, the correct permissions for SSH keys are 600 for the private key, and 644 for the public (.pub)
+
 # 2019/01/24: Automatically start ssh-agent, via
 # https://help.github.com/articles/working-with-ssh-key-passphrases/#auto-launching-ssh-agent-on-git-for-windows
-test ! -d "$HOME/.ssh" && mkdir --parents --mode=700 "$HOME/.ssh"
-# Begin copied script
 env="$HOME/.ssh/agent.env"
 
 agent_load_env () {
@@ -117,6 +119,7 @@ fi
 
 unset env
 # End copied script
+unset agent_run_state # Script doesn't auto clean up this var.
 
 # Detect WSL.
 if grep -q "[Mm]icrosoft" /proc/version; then
