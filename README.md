@@ -3,7 +3,7 @@ Dotfiles
 
 This repository is the one thing I have worked on for my entire career.
 
-My current environment of choice is bash from Ubuntu on Windows, using WSL, with Vagrant and Virtualbox for the
+My current environment of choice is bash from Ubuntu on Windows, using WSL 2, with Vagrant and Virtualbox for the
 (preferably Debian-like) development environments. I like Neovim, or regular Vim, for editing, Tmux, and git.
 I've tried screen and SVN, but never used them enough to develop configuration for them.
 
@@ -14,22 +14,26 @@ The `.vimrc` uses vundle. Installation instructions are in the .vimrc file. `hea
 
 If Neovim is installed, link `~/.vimrc` to `~/.config/nvim/init.vim`. (Check [the Neovim wiki](https://github.com/neovim/neovim/wiki/FAQ#where-should-i-put-my-config-vimrc) to make sure this is correct)
 
-Two fonts are included: [Iosevka](https://be5invis.github.io/Iosevka/), version 1.12.2, and Vimconsolata, a
+Two fonts are included: [Iosevka](https://be5invis.github.io/Iosevka/), version 3.0.1, and Vimconsolata, a
 patched version of [Inconsolata](http://levien.com/type/myfonts/inconsolata.html) (version unknown). Iosevka
-works better with vim-airline, and is used by default in the .vimrc and .minttyrc.
+works better with vim-airline, and is used by default in the .vimrc and .minttyrc. I prefer the "Fixed" version
+of Iosevka, mostly because I don't want ligatures in my math symbols.
 
 Links
 -----
 
-I've broken this section into two categories. First are links for things that I need to manually download and
+I've broken this section into two categories. First are links for things that I need to download and
 install when setting up a new system.
+
+- [Vagrant](https://www.vagrantup.com/) - A commandline tool for creating and managing virtual environments.
+- [Virtualbox](https://www.virtualbox.org/) - Used by Vagrant, Virtualbox does the heavy lifting for my virtual
+  environments,
+
+Neovim and ripgrep are now included in Ubuntu packages, and can be installed with apt!
 
 - [Neovim](https://neovim.io/) - A performant, modern version of Vim.
 - [ripgrep](https://github.com/BurntSushi/ripgrep) - Grep, but written in Rust, with a slightly different
   feature set. Benchmarks suggest it is faster.
-- [Vagrant](https://www.vagrantup.com/) - A commandline tool for creating and managing virtual environments.
-- [Virtualbox](https://www.virtualbox.org/) - Used by Vagrant, Virtualbox does the heavy lifting for my virtual
-  environments,
 
 The other group is links for documentation.
 
