@@ -118,7 +118,7 @@ unset env
 # End copied script
 
 # Detect WSL.
-if grep -q "Microsoft" /proc/version; then
+if grep -q "[Mm]icrosoft" /proc/version; then
     # Configure Vagrant. More info: https://www.vagrantup.com/docs/other/wsl.html
     export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
 
