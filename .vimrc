@@ -27,9 +27,9 @@ Plugin 'Townk/vim-autoclose' " Closes matched pairs automatically.
 Plugin 'airblade/vim-gitgutter' " In a git repo, show the file's git state in the gutter.
 if has('nvim') || (v:version >= 800) " Ale errors on install for Vim 7.4- the Ubuntu 16.04 default
     Plugin 'w0rp/ale' " Automatically lint files.
-    Plugin 'rust-lang/rust.vim' " Rust file detection, syntax highlighting, etc. Needs Vim 8+.
 endif
 Plugin 'jnurmine/Zenburn' " Colorscheme.
+Plugin 'rust-lang/rust.vim' " Rust linting
 call vundle#end()
 filetype plugin indent on
 
@@ -180,7 +180,5 @@ nnoremap <leader>ez :edit ~/.zshrc<CR>
 nnoremap <leader>eb :edit ~/.bashrc<CR>
 nnoremap <leader>eg :edit ~/.gitconfig<CR>
 " Allow quick font resizing for presentations and colleagues.
-"nnoremap <F11> :set guifont=Vimconsolata:h10<CR>
-nnoremap <F11> :set guifont=Iosevka:h10:cANSI:qDRAFT<CR>
-"nnoremap <F12> :set guifont=Vimconsolata:h27<CR>
-nnoremap <F12> :set guifont=Iosevka:h27:cANSI:qDRAFT<CR>
+nnoremap <F11> :set guifont=Iosevka_Fixed:h12:cANSI<CR>
+nnoremap <F12> :set guifont=Iosevka_Fixed:h27:cANSI<CR>
