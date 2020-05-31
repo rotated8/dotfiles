@@ -14,9 +14,8 @@ The `.vimrc` uses vundle. Installation instructions are in the .vimrc file. `hea
 
 If Neovim is installed, link `~/.vimrc` to `~/.config/nvim/init.vim`. (Check [the Neovim wiki](https://github.com/neovim/neovim/wiki/FAQ#where-should-i-put-my-config-vimrc) to make sure this is correct)
 
-Two fonts are included: [Iosevka](https://be5invis.github.io/Iosevka/), version 3.0.1, and Vimconsolata, a
-patched version of [Inconsolata](http://levien.com/type/myfonts/inconsolata.html) (version unknown). Iosevka
-works better with vim-airline, and is used by default in the .vimrc and .minttyrc. I prefer the "Fixed" version
+My preferred font is [Iosevka](https://be5invis.github.io/Iosevka/)- version 3.0.1 Regular Fixed is included.
+Iosevka works well with vim-airline, and is used by default in the `.vimrc`. I prefer the "Fixed" version
 of Iosevka, mostly because I don't want ligatures in my math symbols.
 
 Links
@@ -29,7 +28,7 @@ install when setting up a new system.
 - [Virtualbox](https://www.virtualbox.org/) - Used by Vagrant, Virtualbox does the heavy lifting for my virtual
   environments,
 
-Neovim and ripgrep are now included in Ubuntu packages, and can be installed with apt!
+Neovim and ripgrep are now included in Ubuntu packages, and can be installed with apt (Ubuntu 18.10+)!
 
 - [Neovim](https://neovim.io/) - A performant, modern version of Vim.
 - [ripgrep](https://github.com/BurntSushi/ripgrep) - Grep, but written in Rust, with a slightly different
@@ -55,3 +54,8 @@ Some items here I no longer use regularly. Many of them are from a time when I w
 When using iTerm2, vim-airline needs transparency turned off, text contrast at minimum, and both the ASCII and
 non-ASCII fonts to support the powerline symbols (and probably the same font, in the end).
 
+With the new Windows Terminal, I no longer need the `.minttyrc`. Similarly, `.bash_profile` has been unneeded
+for a little while.
+
+A patched version of [Inconsolata](http://levien.com/type/myfonts/inconsolata.html) (version unknown) used to
+be my preferred terminal font.
