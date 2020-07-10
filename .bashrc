@@ -11,6 +11,11 @@ shopt -s histappend
 # Check the window size after every command.
 shopt -s checkwinsize
 
+# Erase duplicates from bash history
+HISTCONTROL=ignoredups:erasedups
+HISTFILESIZE=10000
+HISTSIZE=10000
+
 # Parse out the branch we're on, or return an empty string. Errors are ignored.
 function parse_git_branch {
     git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ \[\1\]/'
