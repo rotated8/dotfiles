@@ -31,9 +31,9 @@ function tki_status {
         expire_time=$(date --date="$mod_time + 43200 seconds" +"$date_format") # Add 12 hours.
 
         if [[ "$expire_time" -ge "$(date +$date_format)" ]]; then
-            echo -e '\033[0;32mTKI:✓ ' # Green
+            echo -e "\001\033[0;32m\002TKI:✓ " # Green
         else
-            echo -e '\033[0;31mTKI:× ' # Red
+            echo -e "\001\033[0;31m\002TKI:× " # Red
         fi
     fi
 }
