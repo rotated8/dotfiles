@@ -95,6 +95,11 @@ if [[ -d ~/.rbenv/ ]]; then
     eval "$(rbenv init -)"
 fi
 
+# Add fits.sh to PATH if it is installed
+if [[ -f "$HOME/fits/fits.sh" ]]; then
+    export PATH="$PATH:$HOME/fits"
+fi
+
 # Ensure the ~/.ssh dir exists, and is only usable by me.
 test ! -d "$HOME/.ssh" && mkdir --parents --mode=700 "$HOME/.ssh"
 # Tangentially, the correct permissions for SSH keys are 600 for the private key, and 644 for the public (.pub)
