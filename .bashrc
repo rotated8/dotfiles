@@ -90,13 +90,13 @@ test -f ~/git-completion.bash && . ~/git-completion.bash
 # 2017/06/28: rbenv can be installed with `git clone https://github.com/rbenv/rbenv ~/.rbenv`
 # ruby-build is necessary to build and install ruby versions. It can be installed with
 # `git clone https://github.com/rbenv/ruby-build ~/.rbenv/plugins/ruby-build`
-if [[ -d ~/.rbenv/ ]]; then
+if [[ -d ~/.rbenv/ && ":$PATH:" != *":$HOME/.rbenv/bin:"* ]]; then
     export PATH="$PATH:$HOME/.rbenv/bin"
     eval "$(rbenv init -)"
 fi
 
 # Add fits.sh to PATH if it is installed
-if [[ -f "$HOME/fits/fits.sh" ]]; then
+if [[ -f "$HOME/fits/fits.sh" && ":$PATH:" != *":$HOME/fits:"* ]]; then
     export PATH="$PATH:$HOME/fits"
 fi
 
