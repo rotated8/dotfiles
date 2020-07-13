@@ -1,0 +1,288 @@
+#!/usr/bin/env bash
+# Exit at first failure, return failures from pipes
+set -o errexit -o pipefail
+
+function show-version() {
+    echo "ssh-aws v1.0.0, by SolomonHD, Rotated8 - 2019, 2020"
+}
+
+function show-help() {
+    echo "$(show-version)"
+    cat <<EOF
+
+USAGE: ssh-aws [OPTIONS] [--] HOSTNAME
+
+OPTIONS:
+    -h, --help: Show this message.
+    -v, --version: Show version information
+    -a NUMBER, --account-number=NUMBER: Provide the TKI account number of the AWS profile you want to use.
+            ssh-aws will use that account to run it's AWS commands. If this argument is not present, ssh-aws
+            will fall back to \$AWS_PROFILE or \$AWS_DEFAULT_PROFILE, if they are set, or finally to the first
+            TKI profile is can find in ~/.aws/credentials.
+    -u USER, --user=USER: Provide the user you wish to ssh/sftp as. If this argument is not present, ssh-aws
+            will fall back to \$SSH_AWS_USER or \$SSH_EC2_USER, if they are set, or finally 'deploy'.
+    -p, --private: Look up the private IP address for the EC2 you wish to connect to. This is the default.
+            The last instance of this option or -P/--public will override all previous ones.
+    -P, --public: Look up the public IP address for the EC2 you wish to connect to.
+            The last instance of this option or -p/--private will override all previous ones.
+    --ssh: SSH into the target EC2. This is the default.
+            The last instance of this option or --sftp will override all previous ones.
+    --sftp: SFTP into the target EC2.
+            The last instance of this option or --ssh will override all previous ones.
+    -d, --debug: Trace the application as it runs.
+
+HOSTNAME:
+    This should be the value of a "Name" tag on an EC2. This is required.
+
+12-FACTOR:
+    As detailed in the options, the AWS Profile and the user for ssh-aws can be specified with environment
+    variables. Additionally, if it is necessary to specify a key file, \$SSH_AWS_KEY_FILE and
+    \$SSH_EC2_KEY_FILE will be checked.
+
+REQUIREMENTS:
+    This utility requires awscli to be present to work.
+EOF
+    exit
+}
+
+# Handle Params ==================================================================================
+
+account_number=''
+user=''
+debug='false'
+mode='private'
+sftp='false'
+
+while :; do
+    case $1 in
+        -h|--help)
+            show-help
+            ;;
+        -v|--version)
+            show-version
+            exit
+            ;;
+        -a|--account-number)
+            if [[ "$#" -ge 3 && "$2" -gt 0 ]]; then
+                account_number="$2"
+                shift
+            else
+                echo "Account number must be a positive integer"
+                exit
+            fi
+            ;;
+        -a=?*|--account-number=?*)
+            account_number="${1#*=}"
+            ;;
+        -u|--user)
+            if [[ "$#" -ge 3 && ! -z "$2" ]]; then
+                user="$2"
+                shift
+            else
+                echo "You must specify a user"
+                exit
+            fi
+            ;;
+        -u=?*|--user=?*)
+            user="${1#*=}"
+            ;;
+        -d|--debug)
+            debug='true'
+            ;;
+        -p|--private)
+            # Default
+            mode='private'
+            ;;
+        -P|--public)
+            mode='public'
+            ;;
+        --sftp)
+            sftp='true'
+            ;;
+        --ssh)
+            # Default
+            sftp='false'
+            ;;
+        --)
+            shift
+            break
+            ;;
+        -?*)
+            echo "Unknown option: $1"
+            exit 1
+            ;;
+        *)
+            break
+    esac
+
+    shift
+done
+
+if [[ "$#" -ne 1 ]]; then
+    printf "You must supply one and only one hostname.\n"
+    exit 1
+fi
+
+hostname="$1"
+
+# AWS Profile Helpers ============================================================================
+
+function find-tki-account() {
+    account_number="[0-9]+"
+    if [[ "$#" -eq 1 ]]; then
+        account_number="$1"
+    elif [[ "$#" -ge 2 ]]; then
+        printf "Too many args passed to find-tki-account function!\n"
+        exit 1
+    fi
+
+    regex="tki-aws-account-${account_number}-rhedcloud[^]]+"
+    profile="$(grep -E --only-matching --max-count=1 -e ${regex} ~/.aws/credentials)"
+
+    if [[ -z "${profile}" ]]; then
+        printf "No matching profile was found in ~/.aws/credentials\n"
+        exit 1
+    fi
+
+    echo "${profile}"
+}
+
+function get-aws-profile() {
+    if [[ ! -z "${account_number}" ]]; then
+        # Account number set, find that one specifically
+        found_account="$(find-tki-account ${account_number})"
+        echo "${found_account}"
+    elif [[ ! -z "${AWS_PROFILE}" ]]; then
+        # Use AWS_PROFILE
+        echo "${AWS_PROFILE}"
+    elif [[ ! -z "${AWS_DEFAULT_PROFILE}" ]]; then
+        # Fall back to AWS_DEFAULT_PROFILE
+        echo "${AWS_DEFAULT_PROFILE}"
+    else
+        # Find first TKI profile
+        found_account="$(find-tki-account)"
+        echo "${found_account}"
+    fi
+}
+
+# 12-factor Helpers ==============================================================================
+
+function get-user() {
+    if [[ ! -z "${user}" ]]; then
+        # If user was set in flags, use it.
+        echo "${user}"
+    elif [[ ! -z "${SSH_AWS_USER}" ]]; then
+        echo "${SSH_AWS_USER}"
+    elif [[ ! -z "${SSH_EC2_USER}" ]]; then
+        # Backwards compat
+        echo "${SSH_EC2_USER}"
+    else
+        # Default
+        echo 'deploy'
+    fi
+}
+
+function get-key-file() {
+    if [[ ! -z "${SSH_AWS_KEY_FILE}" ]]; then
+        echo "${SSH_AWS_KEY_FILE}"
+    elif [[ ! -z "${SSH_EC2_KEY_FILE}" ]]; then
+        # Backwards compat
+        echo "${SSH_EC2_KEY_FILE}"
+    else
+        # Default
+        echo ''
+    fi
+}
+
+# Get SSH Params =================================================================================
+
+SSH_AWS_PARAMS='-o ServerAliveInterval=30 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o ForwardAgent=yes'
+
+function get-ssh-params() {
+    key="$(get-key-file)"
+    if [[ ! -z "${key}" ]]; then
+        echo "${SSH_AWS_PARAMS} -i ${key}"
+    else
+        echo "${SSH_AWS_PARAMS}"
+    fi
+}
+
+# Get IP from AWS ================================================================================
+
+NAME_FILTER="{\"Name\":\"tag:Name\", \"Values\":[\"${hostname}\"]}"
+STATE_FILER="{\"Name\":\"instance-state-name\",\"Values\":[\"running\", \"pending\"]}"
+QUERY_BASE="Reservations[0].Instances[0]."
+
+function get-ip() {
+    if [[ "$#" -ne 1 ]]; then
+        printf "The get-ip function needs one and only one param. One of 'public', 'private', or 'hostname'\n"
+        exit 1
+    fi
+
+    case "$1" in
+        private)
+            query="${QUERY_BASE}PrivateIpAddress"
+            ;;
+        public)
+            query="${QUERY_BASE}PublicIpAddress"
+            ;;
+        hostname)
+            query="${QUERY_BASE}PublicDnsName"
+            ;;
+        *)
+            echo "The parameter to get-ip can only be 'public', 'private', or 'hostname'\n"
+            exit 1
+    esac
+
+    ip="$(aws ec2 describe-instances --filters "${NAME_FILTER} ${STATE_FILTER}" --query="${query}")"
+    echo "$(echo ${ip} | tr -d '"')"
+}
+
+# Main ===========================================================================================
+
+function main() {
+    # Save and set AWS_PROFILE
+    saved_aws_profile=''
+    if [[ ! -z "${AWS_PROFILE}" ]]; then
+        saved_aws_profile="${AWS_PROFILE}"
+    fi
+
+    export AWS_PROFILE="$(get-aws-profile)"
+
+    # Don't exit on errors until we clean up the profile.
+    set +o errexit
+
+    # Get SSH params
+    params="$(get-ssh-params)"
+
+    # get user
+    user="$(get-user)"
+
+    # get ip using mode
+    ip="$(get-ip ${mode})"
+
+    # call ssh/sftp
+    if [[ "${sftp}" == "true" ]]; then
+        sftp $params $user@$ip
+    else
+        ssh $params $user@$ip
+    fi
+
+    # restore AWS_PROFILE
+    if [[ ! -z "${saved_aws_profile}" ]]; then
+        export AWS_PROFILE="${saved_aws_profile}"
+    else
+        export -n AWS_PROFILE
+    fi
+
+    # We cleaned up the profile, exit on errors again.
+    set -o errexit
+}
+
+# Program entry ==================================================================================
+
+if [[ "${debug}" == 'true' ]]; then
+    set -o xtrace
+fi
+
+main
