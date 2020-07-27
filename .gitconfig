@@ -26,3 +26,5 @@
     autocorrect = 50
 [push]
     default = current
+[init]
+	defaultBranch = main
