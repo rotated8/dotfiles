@@ -6,6 +6,7 @@ set -o errexit -o pipefail -o nounset -o xtrace
 
 # Install updates and basic packages
 export DEBIAN_FRONTEND=noninteractive # Because it's true, and it prevents some dpkg-*configure errors.
+sudo add-apt-repository -y ppa:git-core/ppa # Add the Git PPA so we get an up-to-date git
 sudo apt-get update
 sudo apt-get install -y git vim make gcc g++ software-properties-common neovim ripgrep
 
