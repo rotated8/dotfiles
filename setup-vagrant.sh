@@ -10,15 +10,6 @@ sudo add-apt-repository -y ppa:git-core/ppa # Add the Git PPA so we get an up-to
 sudo apt-get update
 sudo apt-get install -y git vim make gcc g++ software-properties-common neovim ripgrep
 
-# Install Neovim on Ubuntu pre-18.04
-#sudo add-apt-repository -y ppa:neovim-ppa/stable
-#sudo apt-get update
-#sudo apt-get install -y neovim
-
-# Install ripgrep on Ubuntu pre-18.10
-#curl -LO https://github.com/BurntSushi/ripgrep/releases/download/11.0.1/ripgrep_11.0.1_amd64.deb
-#sudo dpkg -i ./ripgrep_11.0.1_amd64.deb
-
 # Install Rbenv, ruby-build
 git clone https://github.com/rbenv/rbenv.git "${HOME}/.rbenv"
 cd "${HOME}/.rbenv" && src/configure && make -C src
