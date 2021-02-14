@@ -182,3 +182,5 @@ nnoremap <leader>eg :edit ~/.gitconfig<CR>
 " Allow quick font resizing for presentations and colleagues.
 nnoremap <F11> :set guifont=Iosevka_Fixed:h12:cANSI<CR>
 nnoremap <F12> :set guifont=Iosevka_Fixed:h27:cANSI<CR>
+" In a terminal, allow <Esc> to exit terminal-mode.
+:tnoremap <Esc> <C-\><C-n>
