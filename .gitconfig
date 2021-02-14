@@ -9,6 +9,7 @@
     co = checkout
     up = remote update -p
     amend = commit --amend
+    # Delete `added` for lack of use?
     added = diff -w --cached
     # files not tracked? git d --no-index before.file after.file
     lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
@@ -16,15 +17,27 @@
 [color]
     ui = auto
 [diff]
+    # Consider changing to minimal, or default
     algorithm = patience
 [fetch]
     prune = true
+    pruneTags = true
+[fetch "fsck"]
+    zeroPaddedFilemode = warn
+    badTimezone = warn
 [grep]
+    fallbackToNoIndex = true
     lineNumber = true
     patternType = perl
 [help]
-    autocorrect = 50
-[push]
-    default = current
+    autoCorrect = 0
 [init]
-	defaultBranch = main
+    defaultBranch = main
+[protocol "http"]
+    allow = never
+[protocol "git"]
+    allow = never
+[push]
+    default = simple
+[transfer]
+    fsckObjects = true
