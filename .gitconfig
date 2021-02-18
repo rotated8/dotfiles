@@ -38,6 +38,6 @@
 [protocol "git"]
     allow = never
 [push]
-    default = simple
+    default = current
 [transfer]
     fsckObjects = true
