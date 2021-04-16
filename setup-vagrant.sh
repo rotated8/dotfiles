@@ -8,9 +8,10 @@ set -o errexit -o pipefail -o nounset -o xtrace
 export DEBIAN_FRONTEND=noninteractive # Because it's true, and it prevents some dpkg-*configure errors.
 sudo add-apt-repository -y ppa:git-core/ppa # Add the Git PPA so we get an up-to-date git
 sudo apt-get update
-sudo apt-get install -y git vim make gcc g++ software-properties-common neovim ripgrep
+sudo apt-get install -y software-properties-common git neovim ripgrep
 
 # Install Rbenv, ruby-build
+sudo apt-get install -y make gcc g++ libssl-dev zlib1g-dev
 git clone https://github.com/rbenv/rbenv.git "${HOME}/.rbenv"
 cd "${HOME}/.rbenv" && src/configure && make -C src
 
@@ -29,9 +30,9 @@ if [[ -e "${HOME}/.bashrc" ]]; then
     set -o errexit -o nounset
 fi
 
-# Install Ruby 2.5.3
-rbenv install 2.5.3
-rbenv global 2.5.3
+# Install Ruby 3.0.0
+rbenv install 3.0.0
+rbenv global 3.0.0
 
 # Update system gems, and force bundler to get installed.
 gem update --system --no-document --no-post-install-message
