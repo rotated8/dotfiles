@@ -15,7 +15,7 @@ sudo apt-get install -y git neovim ripgrep
 
 # Get and install dotfiles
 dot_files_dir="${HOME}/dotfiles"
-git clone https://github.com/rotated8/dotfiles "${dot_files_dir}"
+git clone git@github.com:rotated8/dotfiles.git "${dot_files_dir}"
 /usr/bin/env bash "${HOME}/dotfiles/install.sh" -- "${dot_files_dir}"
 
 # Install asdf
@@ -61,7 +61,7 @@ if [[ -n "${REPO_ORG}" && -n "${REPO_NAME}" ]]; then
     repo_dir="${HOME}/${REPO_NAME}"
 
     # Clone repo
-    git clone "https://github.com/${REPO_ORG}/${REPO_NAME}" "${repo_dir}"
+    git clone "git@github.com:${REPO_ORG}/${REPO_NAME}.git" "${repo_dir}"
 
     # Install gems
     cd "${repo_dir}"
