@@ -6,9 +6,12 @@ set -o errexit -o pipefail -o nounset -o xtrace
 
 # Install updates and basic packages
 export DEBIAN_FRONTEND=noninteractive # Because it's true, and it prevents some dpkg-*configure errors.
-sudo add-apt-repository -y ppa:git-core/ppa # Add the Git PPA so we get an up-to-date git
+# sudo apt-get install software-properties-common # Uncomment if add-apt-repository does not work.
+# Add the Git and NeoVim PPAs so we get updates faster.
+sudo add-apt-repository -y ppa:git-core/ppa
+sudo add-apt-repository -y ppa:neovim-ppa/stable
 sudo apt-get update
-sudo apt-get install -y software-properties-common git neovim ripgrep
+sudo apt-get install -y git neovim ripgrep
 
 # Install Rbenv, ruby-build
 sudo apt-get install -y make gcc g++ libssl-dev zlib1g-dev
