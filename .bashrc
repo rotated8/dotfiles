@@ -160,7 +160,3 @@ export AWS_DEFAULT_PROFILE=''
 if [[ -d "$HOME/emory-tki/bin" && ":$PATH:" != *":$HOME/emory-tki/bin:"* ]]; then
     export PATH=$PATH:"$HOME/emory-tki/bin"
 fi
-if [[ -f "$HOME/workspace/ssh-ec2-script/ssh-to-ec2-by-tag-name" ]]; then
-    source "$HOME/workspace/ssh-ec2-script/ssh-to-ec2-by-tag-name"
-fi
-SSH_EC2_USER=''
