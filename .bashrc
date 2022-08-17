@@ -86,6 +86,12 @@ fi
 # Use git bash completion if it exists.
 test -f ~/git-completion.bash && . ~/git-completion.bash
 
+# Use asdf if it is installed
+if [[ -d "${HOME}/.asdf" ]]; then
+    . "${HOME}/.asdf/asdf.sh"
+    . "${HOME}/.asdf/completions/asdf.bash"
+fi
+
 # Use rbenv if it is installed.
 # 2017/06/28: rbenv can be installed with `git clone https://github.com/rbenv/rbenv ~/.rbenv`
 # ruby-build is necessary to build and install ruby versions. It can be installed with
