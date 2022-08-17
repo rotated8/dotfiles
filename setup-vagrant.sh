@@ -13,40 +13,42 @@ sudo add-apt-repository -y ppa:neovim-ppa/stable
 sudo apt-get update
 sudo apt-get install -y git neovim ripgrep
 
-# Install Rbenv, ruby-build
-sudo apt-get install -y make gcc g++ libssl-dev zlib1g-dev
-git clone https://github.com/rbenv/rbenv.git "${HOME}/.rbenv"
-cd "${HOME}/.rbenv" && src/configure && make -C src
-
-git clone https://github.com/rbenv/ruby-build.git "$(${HOME}/.rbenv/bin/rbenv root)"/plugins/ruby-build
-
 # Get and install dotfiles
 dot_files_dir="${HOME}/dotfiles"
 git clone https://github.com/rotated8/dotfiles "${dot_files_dir}"
 /usr/bin/env bash "${HOME}/dotfiles/install.sh" -- "${dot_files_dir}"
 
-# Source the .bashrc, if it exists, to get rbenv working.
+# Install asdf
+git clone https://github.com/asdf-vm/asdf.git "${HOME}/.asdf" --branch v0.10.2
+
+# Source the .bashrc, if it exists, to get asdf working.
 if [[ -e "${HOME}/.bashrc" ]]; then
-    # The my .bashrc can't handle errexit (ssh helper tests), and Ubuntu's can't handle nounset (??).
+    # My .bashrc can't handle errexit (ssh helper tests), and Ubuntu's can't handle nounset (??).
     set +o errexit +o nounset
     . "${HOME}/.bashrc"
     set -o errexit -o nounset
 fi
 
-# Install Ruby 3.0.0
-rbenv install 3.0.0
-rbenv global 3.0.0
+# Install Ruby 2.7.6
+asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git
+# This list of dependencies comes from ruby-build, which asdf uses to install ruby. https://github.com/rbenv/ruby-build/wiki#suggested-build-environment
+sudo apt-get install -y autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm6 libgdbm-dev libdb-dev uuid-dev
+asdf install ruby 2.7.6
+asdf global ruby 2.7.6
 
 # Update system gems, and force bundler to get installed.
 gem update --system --no-document --no-post-install-message
 gem install --force --no-document bundler
 
+# Install NodeJS
+asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+# This list of dependencies comes from node-build, which asdf uses to install nodejs. https://github.com/nodejs/node/blob/main/BUILDING.md#building-nodejs-on-supported-platforms
+sudo apt-get install python3 g++ make python3-pip
+asdf install nodejs lts # Installs the current long-term supported release.
+asdf global nodejs lts
+
 # Install package dependencies
 sudo apt-get install -y redis-server chromium-browser chromium-chromedriver openjdk-8-jre libmysqlclient-dev libsqlite3-dev #libpq-dev postgresql
-
-# Install Node 8
-curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-sudo apt-get install -y nodejs
 
 # Install Yarn
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
