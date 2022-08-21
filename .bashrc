@@ -20,8 +20,18 @@ HISTSIZE=10000
 function parse_git_branch {
     git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ \[\1\]/'
 }
-# Prompt is 'user@host [branch](in red) directory_name$ '.
-PS1="\[\033[1;33m\]\u@\H\[\033[0;31m\]\$(parse_git_branch)\[\033[0m\] \W\$ "
+
+# Show exit codes in the command prompt, if the code is not zero.
+# Inspired by https://lobste.rs/s/qgqssl/what_are_most_useful_aliases_your_bashrc#c_xa98gj
+function show_exit_code {
+ exit_code=$? # Catch exit code
+ if [[ $exit_code -ne 0 ]]; then
+  echo -e "[$exit_code] "
+ fi
+}
+
+# Prompt is '[exit_code] user@host [branch](in red) directory_name$ '.
+PS1="\[\033[0;31m\]\$(show_exit_code)\[\033[1;33m\]\u@\H\[\033[0;31m\]\$(parse_git_branch)\[\033[0m\] \W\$ "
 
 # If AWS credentials have been updated in the last 12 hours, TKI is probably ok.
 function tki_status {
