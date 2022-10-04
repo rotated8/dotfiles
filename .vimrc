@@ -57,8 +57,7 @@ let g:gitgutter_diff_args = '-w'
 " GUI Settings
 if has('gui_running')
     set guioptions-=T " No toolbar.
-    " Fonts included in https://github.com/rotated8/dotfiles
-    "set guifont=Vimconsolata:h10
+    " Font included in https://github.com/rotated8/dotfiles
     set guifont=Iosevka:h10:cANSI:qDRAFT
     set showtabline=0 " Never show tab bar. File name is in airline. Use buffers and splits!
 endif
@@ -73,7 +72,7 @@ endif
 
 " Tabs are four spaces...
 set autoindent " Copy indent from current line when starting a new one. (nvim default)
-set expandtab " Never  tabs, always convert to spaces.
+set expandtab " Never tabs, always convert to spaces.
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -90,7 +89,7 @@ syntax on
 silent! colorscheme zenburn
 " Number lines
 set number
-" Do't wrap lines until column 111
+" Don't wrap lines until column 111
 set textwidth=111
 " Lightly highlight column 99
 set colorcolumn=99
