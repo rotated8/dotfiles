@@ -1,6 +1,7 @@
 # .bashrc
 
 # Source global definitions.
+# TODO: Is this necessary? I think /etc/profile is loaded first, which loads /etc/bash.bashrc, then this?
 test -f /etc/bash.bashrc && . /etc/bash.bashrc
 
 # User specific aliases and functions.
@@ -54,17 +55,24 @@ if [[ $CHECK_TKI == 'true' ]]; then
 fi
 
 # Grep should use perl regexps, be recursive, ignore case, and print line numbers. In that order.
-alias g='grep -Prin'
+alias g='grep -Prin --color=auto'
 # Use ripgrep, if installed. https://github.com/BurntSushi/ripgrep
 if which rg 1> /dev/null 2> /dev/null; then
     alias grep='rg'
-    # ripgrep uses Perl(-like) regexps, and is recursive by default.
+    # ripgrep uses Perl(-like) regexps, is recursive, and colorful by default.
     alias g='rg -in'
 fi
 
+# Use dircolors to setup colors for ls.
+if [[ -x /usr/bin/dircolors ]]; then
+    if [[ -f "${HOME}/.dircolors" ]]; then
+        eval "$(dircolors -b ~/.dircolors)"
+    else
+        eval "$(dircolors -b)"
+    fi
+fi
 # ls Should list everything except '.' and '..' in long form, and have color.
-export LSCOLORS='dxfxcxdxbxegedabagacad' # Directories are NOT dark blue.
-alias ls='ls -Alh'
+alias ls='ls -Alh --color=auto'
 # tree should act like ls.
 alias tree='tree -Ca'
 
@@ -149,9 +157,6 @@ unset agent_run_state # Script doesn't auto clean up this var.
 
 # Detect WSL.
 if grep -q "[Mm]icrosoft" /proc/version; then
-    # Configure Vagrant. More info: https://www.vagrantup.com/docs/other/wsl.html
-    export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
-
     # Make it easy to change to my Windows home.
     # -u to convert from Windows to WSL, and -a to force an absolute path.
     win_home=$(wslpath -u -a $(wslvar USERPROFILE))
