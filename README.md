@@ -30,7 +30,7 @@ install when setting up a new system.
 
 Neovim and ripgrep are now included in Ubuntu packages, and can be installed with apt (Ubuntu 18.10+)!
 
-- [Neovim](https://neovim.io/) - A performant, modern version of Vim.
+- [Neovim](https://neovim.io/) - A performant, modern version of Vim. Must be 0.9.0 or later.
 - [ripgrep](https://github.com/BurntSushi/ripgrep) - Grep, but written in Rust, with a slightly different
   feature set. Benchmarks suggest it is faster.
 

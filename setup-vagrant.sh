@@ -9,9 +9,9 @@ export DEBIAN_FRONTEND=noninteractive # Because it's true, and it prevents some 
 # sudo apt-get install software-properties-common # Uncomment if add-apt-repository does not work.
 # Add the Git and NeoVim PPAs so we get updates faster.
 sudo add-apt-repository -y ppa:git-core/ppa
-sudo add-apt-repository -y ppa:neovim-ppa/stable
+#sudo add-apt-repository -y ppa:neovim-ppa/stable # This is a bad, old version. Download the appimage instead.
 sudo apt-get update
-sudo apt-get install -y git neovim ripgrep
+sudo apt-get install -y git ripgrep # neovim
 
 # Get and install dotfiles
 dot_files_dir="${HOME}/dotfiles"
