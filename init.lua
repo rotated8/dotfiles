@@ -41,7 +41,8 @@ vim.opt.linebreak = true -- New! Wraps lines that are too long at a convenient p
 -- TODO: Look at formatoptions, spectifically 'l' and 'v'.
 vim.opt.textwidth = 121
 vim.opt.colorcolumn = '-10' -- New way to set! This is relative to 'textwidth'
-vim.api.nvim_set_hl(0, 'ColorColumn', { bg = '#444444' })
+vim.opt.termguicolors = true -- New! Force Neovim to use 256 colors.
+vim.api.nvim_set_hl(0, 'ColorColumn', { bg = '#434443' })
 vim.opt.cursorline = true
 -- vim.opt.wildmenu = true -- A Neovim default.
 -- vim.opt.lazyredraw = true -- Docs suggest this should not be set all the time.
@@ -62,7 +63,6 @@ vim.opt.matchpairs:append({ '<:>', '":"', "':'", '`:`' })
 -- vim.opt.errorbells = false -- A Neovim default.
 -- vim.opt.visualbell = true -- Neovim sets 'belloff' to 'all' by default.
 vim.opt.wildignorecase = true -- New! Ignore case when completing filenames.
-vim.opt.termguicolors = true -- New! Force Neovim to use 256 colors.
 
 -- Whitespace Highlighting
 vim.api.nvim_set_hl(0, 'BadWhitespace', { bg = 'DarkRed' })
