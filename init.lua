@@ -4,14 +4,23 @@ vim.opt.modeline = false
 
 -- Not necessary to remove autocommands, this version uses groups that automatically clear.
 
--- Plugin Management
--- TODO: Turn on matchit?
--- TODO
+-- Plugin Management. Replace Vundle with lazy.nvim
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    'git', 'clone', '--filter=blob:none', 'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable', -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
 
--- TODO: Use the Zenburn colorscheme
-
--- Plugin Settings
--- TODO
+require('lazy').setup({
+    { 'phha/zenburn.nvim', opts = {} , priority = 1000, lazy = false },
+    { 'nvim-lualine/lualine.nvim', opts = { options = { theme = 'zenburn' } } },
+    { 'windwp/nvim-autopairs', opts = {} },
+    { 'lewis6991/gitsigns.nvim', opts = {} },
+})
 
 -- GUI settings have been removed. Neovim doesn't provide a GUI.
 
