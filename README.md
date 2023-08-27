@@ -18,6 +18,10 @@ My preferred font is [Iosevka](https://be5invis.github.io/Iosevka/)- version 3.0
 Iosevka works well with vim-airline, and is used by default in the `.vimrc`. I prefer the "Fixed" version
 of Iosevka, mostly because I don't want ligatures in my math symbols.
 
+`WSLInterop.conf` should be copied to `/usr/lib/binfmt.d` when you see "grep: /proc/sys/fs/binfmt\_misc/WSLInterop: No such file or directory" at login.
+Then, restart WSL and the message should go away. This should only be necessary if systemd is enabled.
+This solution comes from [WSL#8843](https://github.com/microsoft/WSL/issues/8843) and [systemd#28126](https://github.com/systemd/systemd/issues/28126)
+
 Links
 -----
 
