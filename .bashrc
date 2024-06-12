@@ -142,35 +142,36 @@ if grep -q "[Mm]icrosoft" /proc/version; then
     unset wsl_home
 
     # Use Windows' OpenSSH so you can read keys in 1Password.
-    alias ssh='ssh.exe'
-    alias ssh-add='ssh-add.exe'
-else
-    # 2023/12/24: Outside of WSL, automatically start ssh-agent, via
-    # https://docs.github.com/en/authentication/connecting-to-github-with-ssh/working-with-ssh-key-passphrases#auto-launching-ssh-agent-on-git-for-windows
-    env="${HOME}/.ssh/agent.env"
-
-    agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
-
-    agent_start () {
-        (umask 077; ssh-agent >| "$env")
-        . "$env" >| /dev/null ; }
-
-    agent_load_env
-
-    # agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2=agent not running
-    agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
-
-    if [[ ! "$SSH_AUTH_SOCK" || $agent_run_state = 2 ]]; then
-        agent_start
-        ssh-add
-    elif [[ "$SSH_AUTH_SOCK" && $agent_run_state = 1 ]]; then
-        ssh-add
-    fi
-
-    unset env
-    # End copied script
-    unset agent_run_state # Script doesn't auto clean up this var.
+    # ONLY FOR USE IF ALL KEYS ARE IN 1PASSWORD
+    #alias ssh='ssh.exe'
+    #alias ssh-add='ssh-add.exe'
 fi
+
+# 2024/06/12 Always set up the agent. With WSL, 1Password cannot import extra keys.
+# https://docs.github.com/en/authentication/connecting-to-github-with-ssh/working-with-ssh-key-passphrases#auto-launching-ssh-agent-on-git-for-windows
+env="${HOME}/.ssh/agent.env"
+
+agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
+
+agent_start () {
+    (umask 077; ssh-agent >| "$env")
+    . "$env" >| /dev/null ; }
+
+agent_load_env
+
+# agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2=agent not running
+agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
+
+if [[ ! "$SSH_AUTH_SOCK" || $agent_run_state = 2 ]]; then
+    agent_start
+    ssh-add
+elif [[ "$SSH_AUTH_SOCK" && $agent_run_state = 1 ]]; then
+    ssh-add
+fi
+
+unset env
+# End copied script
+unset agent_run_state # Script doesn't auto clean up this var.
 
 # AWS environment variables only work when exported. Setting them is not enough.
 export AWS_DEFAULT_PROFILE=''
