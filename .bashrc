@@ -119,6 +119,11 @@ if [[ -d ~/.rbenv/ && ":$PATH:" != *":$HOME/.rbenv/bin:"* ]]; then
     eval "$(rbenv init -)"
 fi
 
+# Source Rust's setup, if present.
+if [[ -f "${HOME}/.cargo/env" ]]; then
+    . "${HOME}/.cargo/env"
+fi
+
 # Add fits.sh to PATH if it is installed
 if [[ -f "$HOME/fits/fits.sh" && ":$PATH:" != *":$HOME/fits:"* ]]; then
     export PATH="$PATH:$HOME/fits"
