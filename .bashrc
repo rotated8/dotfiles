@@ -70,7 +70,9 @@ export VISUAL=gvim
 export GIT_EDITOR=vim
 
 # Prefer nvim if installed. https://neovim.io/
-if which nvim 1> /dev/null 2> /dev/null; then
+# This uses the prebuilt tarballs.
+if [[ -d /opt/nvim-linux-x86_64/ && ":$PATH:" != *":/opt/nvim-linux-x86_64/bin:"* ]]; then
+    export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
     alias vim='nvim'
     export EDITOR=nvim
     export GIT_EDITOR=nvim
