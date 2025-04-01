@@ -78,11 +78,6 @@ if [[ -d /opt/nvim-linux-x86_64/ && ":$PATH:" != *":/opt/nvim-linux-x86_64/bin:"
     export GIT_EDITOR=nvim
 fi
 
-# Prefer Python3 in virtualenvs, if installed.
-if which python3 1> /dev/null 2> /dev/null; then
-    export VIRTUALENV_PYTHON=python3
-fi
-
 # Use git bash completion if it exists.
 test -f ~/git-completion.bash && . ~/git-completion.bash
 
@@ -90,6 +85,14 @@ test -f ~/git-completion.bash && . ~/git-completion.bash
 if [[ -d "${HOME}/.asdf" ]]; then
     . "${HOME}/.asdf/asdf.sh"
     . "${HOME}/.asdf/completions/asdf.bash"
+fi
+
+# This is added by UV 0.6.11
+. "$HOME/.local/bin/env"
+
+# Prefer Python3 in virtualenvs, if installed.
+if which python3 1> /dev/null 2> /dev/null; then
+    export VIRTUALENV_PYTHON=python3
 fi
 
 # Use rbenv if it is installed.
