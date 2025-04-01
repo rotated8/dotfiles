@@ -83,8 +83,8 @@ test -f ~/git-completion.bash && . ~/git-completion.bash
 
 # Use asdf if it is installed
 if [[ -d "${HOME}/.asdf" ]]; then
-    . "${HOME}/.asdf/asdf.sh"
-    . "${HOME}/.asdf/completions/asdf.bash"
+    export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+    . <(asdf completion bash)
 fi
 
 # This is added by UV 0.6.11
@@ -165,4 +165,3 @@ unset agent_run_state # Script doesn't auto clean up this var.
 
 # AWS environment variables only work when exported. Setting them is not enough.
 export AWS_DEFAULT_PROFILE=''
-
