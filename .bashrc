@@ -34,26 +34,6 @@ function show_exit_code {
 # Prompt is '[exit_code] user@host [branch](in red) directory_name$ '.
 PS1="\[\033[0;31m\]\$(show_exit_code)\[\033[1;33m\]\u@\H\[\033[0;31m\]\$(parse_git_branch)\[\033[0m\] \W\$ "
 
-# If AWS credentials have been updated in the last 12 hours, TKI is probably ok.
-function tki_status {
-    if [[ -e "$HOME/.aws/credentials" ]]; then
-        date_format="%Y%m%d%H%M%S" # Reduces time to a comparable number, not epoch dependant.
-        mod_time=$(date --reference="$HOME/.aws/credentials") # Time AWS creds were modified.
-        expire_time=$(date --date="$mod_time + 43200 seconds" +"$date_format") # Add 12 hours.
-
-        if [[ "$expire_time" -ge "$(date +$date_format)" ]]; then
-            echo -e "\001\033[0;32m\002TKI:✓ " # Green
-        else
-            echo -e "\001\033[0;31m\002TKI:× " # Red
-        fi
-    fi
-}
-# Add the TKI Status to the prompt only if enabled.
-CHECK_TKI='false'
-if [[ $CHECK_TKI == 'true' ]]; then
-    PS1="\$(tki_status)$PS1"
-fi
-
 # Grep should use perl regexps, be recursive, ignore case, and print line numbers. In that order.
 alias g='grep -Prin --color=auto'
 # Use ripgrep, if installed. https://github.com/BurntSushi/ripgrep
@@ -181,6 +161,3 @@ unset agent_run_state # Script doesn't auto clean up this var.
 # AWS environment variables only work when exported. Setting them is not enough.
 export AWS_DEFAULT_PROFILE=''
 
-if [[ -d "$HOME/emory-tki/bin" && ":$PATH:" != *":$HOME/emory-tki/bin:"* ]]; then
-    export PATH=$PATH:"$HOME/emory-tki/bin"
-fi
