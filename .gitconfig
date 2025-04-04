@@ -40,4 +40,4 @@
 [transfer]
     fsckObjects = true
 [core]
-    sshCommand = ssh.exe
+	sshCommand = C:/Windows/System32/OpenSSH/ssh.exe

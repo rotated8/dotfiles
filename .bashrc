@@ -133,8 +133,8 @@ if grep -q "[Mm]icrosoft" /proc/version; then
 
     # Use Windows' OpenSSH so you can read keys in 1Password.
     # ONLY FOR USE IF ALL KEYS ARE IN 1PASSWORD
-    alias ssh='ssh.exe'
-    alias ssh-add='ssh-add.exe'
+    #alias ssh='ssh.exe'
+    #alias ssh-add='ssh-add.exe'
 fi
 
 # 2024/06/12 Always set up the agent. With WSL, 1Password cannot import extra keys.
