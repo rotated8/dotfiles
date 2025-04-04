@@ -95,15 +95,6 @@ if which python3 1> /dev/null 2> /dev/null; then
     export VIRTUALENV_PYTHON=python3
 fi
 
-# Use rbenv if it is installed.
-# 2017/06/28: rbenv can be installed with `git clone https://github.com/rbenv/rbenv ~/.rbenv`
-# ruby-build is necessary to build and install ruby versions. It can be installed with
-# `git clone https://github.com/rbenv/ruby-build ~/.rbenv/plugins/ruby-build`
-if [[ -d ~/.rbenv/ && ":$PATH:" != *":$HOME/.rbenv/bin:"* ]]; then
-    export PATH="$PATH:$HOME/.rbenv/bin"
-    eval "$(rbenv init -)"
-fi
-
 # Source Rust's setup, if present.
 if [[ -f "${HOME}/.cargo/env" ]]; then
     . "${HOME}/.cargo/env"
