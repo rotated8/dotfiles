@@ -90,11 +90,6 @@ fi
 # This is added by UV 0.6.11
 . "$HOME/.local/bin/env"
 
-# Prefer Python3 in virtualenvs, if installed.
-if which python3 1> /dev/null 2> /dev/null; then
-    export VIRTUALENV_PYTHON=python3
-fi
-
 # Source Rust's setup, if present.
 if [[ -f "${HOME}/.cargo/env" ]]; then
     . "${HOME}/.cargo/env"
