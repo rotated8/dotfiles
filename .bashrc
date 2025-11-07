@@ -103,9 +103,7 @@ test ! -d "$HOME/.ssh" && mkdir --parents --mode=700 "$HOME/.ssh"
 if grep -q "[Mm]icrosoft" /proc/version; then
     # Make it easy to change to my Windows home.
     # -u to convert from Windows to WSL, and -a to force an absolute path.
-    win_home=$(wslpath -u -a $(wslvar USERPROFILE))
-    # That path might have a '/', '\r', and/or '\n' at the end. Remove them and add '/workspace/'
-    wsl_home=$(echo "$win_home" | sed -re 's/\/?\r?\n?$/\/workspace\//g')
+    wsl_home="$(wslpath -u -a $(cmd.exe /c "echo %USERPROFILE%" 2> /dev/null | tr -d '\r\n'))/workspace/"
     # Ensure the workspace dir exists.
     test ! -d "$wsl_home" && mkdir --parents "$wsl_home"
     alias home="cd \"$wsl_home\""
