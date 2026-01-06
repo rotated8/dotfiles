@@ -74,7 +74,7 @@ else
     echo "Neovim is missing, moving on..."
 
     # Neovim is missing. Only set up Vim if it is present with a .vimrc
-    if [[ -n "`command -v vim`" && -e "${HOME}/.vimrc" ]]
+    if [[ -n "`command -v vim`" && -e "${HOME}/.vimrc" ]]; then
         # Install Vundle if it is missing.
         echo "Installing Vim plugins..."
         if [[ ! -d "${HOME}/.vim/bundle/Vundle.vim" ]]; then
