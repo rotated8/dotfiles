@@ -59,3 +59,5 @@ A patched version of [Inconsolata](http://levien.com/type/myfonts/inconsolata.ht
 be my preferred terminal font.
 
 The `.vimrc` uses vundle. Installation instructions are in the .vimrc file. `head -n 20 ./.vimrc` is an easy way to read them, but I prefer to use Neovim now.
+
+I used to use Vagrant for development, but I haven't even installed it in years.
