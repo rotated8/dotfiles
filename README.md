@@ -3,8 +3,8 @@ Dotfiles
 
 This repository is the one thing I have worked on for my entire career.
 
-My current environment of choice is bash from Ubuntu on Windows, using WSL 2, with Vagrant and Virtualbox for the
-(preferably Debian-like) development environments. I like Neovim, or regular Vim, for editing, Tmux, and git.
+My current environment of choice is bash from Ubuntu on Windows, using WSL 2.
+I like Neovim, or regular Vim, for editing, Tmux, and git. uv has become an integral part of development.
 I've tried screen and SVN, but never used them enough to develop configuration for them.
 
 Notes
@@ -24,6 +24,7 @@ install when setting up a new system.
 
 - [Neovim](https://neovim.io/) - A performant, modern version of Vim. Must be 0.9.0 or later. Use the [Linux install
   instructions](https://neovim.io/doc/install/#linux) for prebuilt archives.
+- [uv](https://docs.astral.sh/uv/) - All the Python management you could need.
 - [ripgrep](https://github.com/BurntSushi/ripgrep) - Grep, but written in Rust, with a slightly different
   feature set. Benchmarks suggest it is faster.
 - [hyperfine](https://github.com/sharkdp/hyperfine) - A commandline tool for benchmarking tasks.
