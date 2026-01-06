@@ -26,15 +26,11 @@ Links
 I've broken this section into two categories. First are links for things that I need to download and
 install when setting up a new system.
 
-- [Vagrant](https://www.vagrantup.com/) - A commandline tool for creating and managing virtual environments.
-- [Virtualbox](https://www.virtualbox.org/) - Used by Vagrant, Virtualbox does the heavy lifting for my virtual
-  environments,
-
-Neovim and ripgrep are now included in Ubuntu packages, and can be installed with apt (Ubuntu 18.10+)!
-
-- [Neovim](https://neovim.io/) - A performant, modern version of Vim. Must be 0.9.0 or later.
+- [Neovim](https://neovim.io/) - A performant, modern version of Vim. Must be 0.9.0 or later. Use the [Linux install
+  instructions](https://neovim.io/doc/install/#linux) for prebuilt archives.
 - [ripgrep](https://github.com/BurntSushi/ripgrep) - Grep, but written in Rust, with a slightly different
   feature set. Benchmarks suggest it is faster.
+- [hyperfine](https://github.com/sharkdp/hyperfine) - A commandline tool for benchmarking tasks.
 
 The other group is links for documentation.
 
