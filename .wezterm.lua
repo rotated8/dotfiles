@@ -2,6 +2,7 @@ local wezterm = require 'wezterm'
 local config = wezterm.config_builder()
 
 config.color_scheme = 'Zenburn'
+config.font = wezterm.font 'Iosevka Term'
 config.default_prog = { 'wsl.exe' }
 config.launch_menu = {
     {
