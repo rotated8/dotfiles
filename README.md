@@ -10,13 +10,11 @@ I've tried screen and SVN, but never used them enough to develop configuration f
 Notes
 -----
 
-The `.vimrc` uses vundle. Installation instructions are in the .vimrc file. `head -n 20 ./.vimrc` is an easy way to read them.
+`init.lua` is the preferred config for Neovim. It should live in `~/.config/nvim`.
+To install plugins, run `nvim --headless "+Lazy! sync" +qall`, or use `install.sh`.
 
-If Neovim is installed, link `~/.vimrc` to `~/.config/nvim/init.vim`. (Check [the Neovim wiki](https://github.com/neovim/neovim/wiki/FAQ#where-should-i-put-my-config-vimrc) to make sure this is correct)
-
-My preferred font is [Iosevka](https://be5invis.github.io/Iosevka/)- version 3.0.1 Regular Fixed is included.
-Iosevka works well with vim-airline, and is used by default in the `.vimrc`. I prefer the "Fixed" version
-of Iosevka, mostly because I don't want ligatures in my math symbols.
+My preferred font is [Iosevka](https://be5invis.github.io/Iosevka/)- get the latest release of Iosevka Term.
+Iosevka works well with vim-airline, and is used by default in configs.
 
 `WSLInterop.conf` should be copied to `/usr/lib/binfmt.d` when you see "grep: /proc/sys/fs/binfmt\_misc/WSLInterop: No such file or directory" at login.
 Then, restart WSL and the message should go away. This should only be necessary if systemd is enabled.
@@ -63,3 +61,5 @@ for a little while.
 
 A patched version of [Inconsolata](http://levien.com/type/myfonts/inconsolata.html) (version unknown) used to
 be my preferred terminal font.
+
+The `.vimrc` uses vundle. Installation instructions are in the .vimrc file. `head -n 20 ./.vimrc` is an easy way to read them, but I prefer to use Neovim now.
