@@ -6,7 +6,6 @@ config.font = wezterm.font 'Iosevka Term'
 config.default_prog = { 'pwsh.exe' }
 config.default_domain = 'WSL:Ubuntu'
 config.keys = {
-    { key = 'c', mods = 'CTRL', action = wezterm.action.CopyTo 'Clipboard' },
     { key = 'v', mods = 'CTRL', action = wezterm.action.PasteFrom 'Clipboard' },
 }
 -- Right-mouse copy and paste, via https://github.com/wezterm/wezterm/discussions/3541#discussioncomment-5633570
