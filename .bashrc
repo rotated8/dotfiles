@@ -16,23 +16,14 @@ function parse_git_branch {
 # Show exit codes in the command prompt, if the code is not zero.
 # Inspired by https://lobste.rs/s/qgqssl/what_are_most_useful_aliases_your_bashrc#c_xa98gj
 function show_exit_code {
- exit_code=$? # Catch exit code
- if [[ $exit_code -ne 0 ]]; then
-  echo -e "[$exit_code] "
- fi
+    exit_code=$? # Catch exit code
+    if [[ $exit_code -ne 0 ]]; then
+        echo -e "[$exit_code] "
+    fi
 }
 
 # Prompt is '[exit_code] user@host [branch](in red) directory_name$ '.
 PS1="\[\033[0;31m\]\$(show_exit_code)\[\033[1;33m\]\u@\H\[\033[0;31m\]\$(parse_git_branch)\[\033[0m\] \W\$ "
-
-# Grep should use perl regexps, be recursive, ignore case, and print line numbers. In that order.
-alias g='grep -Prin --color=auto'
-# Use ripgrep, if installed. https://github.com/BurntSushi/ripgrep
-if which rg 1> /dev/null 2> /dev/null; then
-    alias grep='rg'
-    # ripgrep uses Perl(-like) regexps, is recursive, and colorful by default.
-    alias g='rg -in'
-fi
 
 # Use dircolors to setup colors for ls.
 if [[ -x /usr/bin/dircolors ]]; then
@@ -46,6 +37,15 @@ fi
 alias ls='ls -Alh --color=auto'
 # tree should act like ls.
 alias tree='tree -Ca'
+
+# Grep should use perl regexps, be recursive, ignore case, and print line numbers. In that order.
+alias g='grep -Prin --color=auto'
+# Use ripgrep, if installed. https://github.com/BurntSushi/ripgrep
+if which rg 1> /dev/null 2> /dev/null; then
+    alias grep='rg'
+    # ripgrep uses Perl(-like) regexps, is recursive, and colorful by default.
+    alias g='rg -in'
+fi
 
 # getmod gets the mode of a file, without having to look up stat.
 alias getmod='stat --format="%a(%A) %N"'
@@ -74,18 +74,18 @@ fi
 # Use git bash completion if it exists.
 test -f ~/git-completion.bash && . ~/git-completion.bash
 
-# Use asdf if it is installed
-if [[ -d "${HOME}/.asdf" ]]; then
-    export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
-    . <(asdf completion bash)
-fi
-
 # This is added by UV 0.6.11
 . "$HOME/.local/bin/env"
 
 # Source Rust's setup, if present.
 if [[ -f "${HOME}/.cargo/env" ]]; then
     . "${HOME}/.cargo/env"
+fi
+
+# Use asdf if it is installed
+if [[ -d "${HOME}/.asdf" ]]; then
+    export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+    . <(asdf completion bash)
 fi
 
 # Ensure the ~/.ssh dir exists, and is only usable by me.
