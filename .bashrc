@@ -1,12 +1,3 @@
-# .bashrc
-
-# Source global definitions.
-# TODO: Is this necessary? I think /etc/profile is loaded first, which loads /etc/bash.bashrc, then this?
-test -f /etc/bash.bashrc && . /etc/bash.bashrc
-
-# User specific aliases and functions.
-################################################################################
-
 # Append to history file instead of overwriting it.
 shopt -s histappend
 # Check the window size after every command.
