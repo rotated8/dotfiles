@@ -1,8 +1,8 @@
 -- This config is a port of my .vimrc for Neovim.
+-- Commented options needed to be set in Vim, but are defaults in Neovim.
 vim.opt.modeline = false
 
--- LSP Setup
--- Configs copied from https://github.com/neovim/nvim-lspconfig on 2026-01-14.
+-- LSP Setup Configs copied from https://github.com/neovim/nvim-lspconfig on 2026-01-14.
 vim.lsp.config('ty', {
     cmd = { 'ty', 'server' },
     filetypes = { 'python' },
@@ -26,7 +26,7 @@ vim.lsp.enable('ty')
 vim.lsp.enable('ruff')
 
 -- Tab Settings
--- vim.opt.autoindent = true -- Copy indent from current line when starting a new one (Neovim default).
+-- vim.opt.autoindent = true -- Copy indent from current line when starting a new one.
 vim.opt.expandtab = true -- Never tabs, always convert to spaces.
 vim.opt.tabstop = 4 -- Tabs are four spaces...
 vim.opt.shiftwidth = 4
@@ -46,23 +46,23 @@ vim.api.nvim_create_autocmd({ 'Filetype' }, {
 
 -- General Settings
 -- Syntax highlighting is on by default.
+vim.opt.termguicolors = true
 vim.opt.number = true
 vim.opt.linebreak = true -- Wrap lines that are too long at a convenient place.
 -- TODO: Look at formatoptions, spectifically 'l' and 'v'.
 vim.opt.textwidth = 121
 vim.opt.colorcolumn = '-10' -- This is relative to 'textwidth'
-vim.opt.termguicolors = true -- Force Neovim to use 256 colors.
 vim.api.nvim_set_hl(0, 'ColorColumn', { bg = '#434443' })
 vim.opt.cursorline = true
--- vim.opt.wildmenu = true -- A Neovim default.
+-- vim.opt.wildmenu = true
 -- vim.opt.lazyredraw = true -- Docs suggest this should not be set all the time.
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.scrolloff = 5
--- vim.opt.display = 'lastline' -- A Neovim default.
+-- vim.opt.display = 'lastline'
 -- vim.opt.backup = false -- Docs say this is default in Vim.
--- vim.opt.backspace = { 'indent', 'eol', 'start' } -- A Neovim default.
--- vim.opt.encoding = 'utf-8' -- A Neovim default.
+-- vim.opt.backspace = { 'indent', 'eol', 'start' }
+-- vim.opt.encoding = 'utf-8'
 vim.opt.fileformats = { 'unix', 'dos' } -- This is the Unix default, reversed for Windows.
 vim.opt.fileformat = 'unix' -- This is the Unix default, set for Windows.
 vim.opt.tildeop = true
@@ -70,7 +70,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.hlsearch = false
 vim.opt.matchpairs:append({ '<:>', '":"', "':'", '`:`' })
--- vim.opt.errorbells = false -- A Neovim default.
+-- vim.opt.errorbells = false
 -- vim.opt.visualbell = true -- Neovim sets 'belloff' to 'all' by default.
 vim.opt.wildignorecase = true -- Ignore case when completing filenames.
 
