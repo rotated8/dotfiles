@@ -1,8 +1,5 @@
 -- This config is a port of my .vimrc for Neovim.
--- vim.opt.compatible = false -- NeoVim is always 'nocompatible', this option has been removed.
 vim.opt.modeline = false
-
--- Not necessary to remove autocommands, this version uses groups that automatically clear.
 
 -- Plugin Management. Replace Vundle with lazy.nvim
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
@@ -55,11 +52,11 @@ vim.api.nvim_create_autocmd({ 'Filetype' }, {
 -- General Settings
 -- Syntax highlighting is on by default.
 vim.opt.number = true
-vim.opt.linebreak = true -- New! Wraps lines that are too long at a convenient place.
+vim.opt.linebreak = true -- Wrap lines that are too long at a convenient place.
 -- TODO: Look at formatoptions, spectifically 'l' and 'v'.
 vim.opt.textwidth = 121
-vim.opt.colorcolumn = '-10' -- New way to set! This is relative to 'textwidth'
-vim.opt.termguicolors = true -- New! Force Neovim to use 256 colors.
+vim.opt.colorcolumn = '-10' -- This is relative to 'textwidth'
+vim.opt.termguicolors = true -- Force Neovim to use 256 colors.
 vim.api.nvim_set_hl(0, 'ColorColumn', { bg = '#434443' })
 vim.opt.cursorline = true
 -- vim.opt.wildmenu = true -- A Neovim default.
@@ -80,7 +77,7 @@ vim.opt.hlsearch = false
 vim.opt.matchpairs:append({ '<:>', '":"', "':'", '`:`' })
 -- vim.opt.errorbells = false -- A Neovim default.
 -- vim.opt.visualbell = true -- Neovim sets 'belloff' to 'all' by default.
-vim.opt.wildignorecase = true -- New! Ignore case when completing filenames.
+vim.opt.wildignorecase = true -- Ignore case when completing filenames.
 
 -- Whitespace Highlighting
 vim.api.nvim_set_hl(0, 'BadWhitespace', { bg = 'DarkRed' })
