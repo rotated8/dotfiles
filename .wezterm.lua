@@ -32,6 +32,18 @@ config.mouse_bindings = {
     },
 }
 
+-- Turn off audible bell, turn on visual bell.
+config.audible_bell = 'Disabled'
+config.visual_bell = {
+    fade_in_function = 'EaseIn',
+    fade_in_duration_ms = 150,
+    fade_out_function = 'EaseOut',
+    fade_out_duration_ms = 150,
+}
+config.colors = {
+    visual_bell = '#202020',
+}
+
 wezterm.on('gui-startup', function(cmd)
     -- I use a vertical monitor sometimes. Find it, or default to the main one.
     local target_screen = wezterm.gui.screens().main.name
