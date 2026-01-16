@@ -5,6 +5,13 @@ config.color_scheme = 'Zenburn'
 config.font = wezterm.font 'Iosevka Term'
 config.default_prog = { 'pwsh.exe' }
 config.default_domain = 'WSL:Ubuntu'
+config.window_padding = {
+    left = '5px',
+    right = '5px',
+    top = '2px',
+    bottom = '2px'
+}
+
 config.keys = {
     { key = 'v', mods = 'CTRL', action = wezterm.action.PasteFrom 'Clipboard' },
 }
