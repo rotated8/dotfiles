@@ -4,23 +4,23 @@ vim.opt.modeline = false
 -- LSP Setup
 -- Configs copied from https://github.com/neovim/nvim-lspconfig on 2026-01-14.
 vim.lsp.config('ty', {
-  cmd = { 'ty', 'server' },
-  filetypes = { 'python' },
-  root_markers = { 'ty.toml', 'pyproject.toml', 'setup.py', 'setup.cfg', 'requirements.txt', '.git' },
-  settings = { ty={} }
+    cmd = { 'ty', 'server' },
+    filetypes = { 'python' },
+    root_markers = { 'ty.toml', 'pyproject.toml', 'setup.py', 'setup.cfg', 'requirements.txt', '.git' },
+    settings = { ty={} }
 })
 vim.lsp.config('ruff', {
-  cmd = { 'ruff', 'server' },
-  filetypes = { 'python' },
-  root_markers = { 'pyproject.toml', 'ruff.toml', '.ruff.toml', '.git' },
-  settings = {
-      lineLength = 121,
-      configuration = {
-          format = {
-              ['quote-style'] = 'single'
-          }
-      }
-  },
+    cmd = { 'ruff', 'server' },
+    filetypes = { 'python' },
+    root_markers = { 'pyproject.toml', 'ruff.toml', '.ruff.toml', '.git' },
+    settings = {
+        lineLength = 121,
+        configuration = {
+            format = {
+                ['quote-style'] = 'single'
+            }
+        }
+    },
 })
 vim.lsp.enable('ty')
 vim.lsp.enable('ruff')
@@ -111,8 +111,8 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
     local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
     if vim.v.shell_error ~= 0 then
         vim.api.nvim_echo({
-              { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-              { out, "WarningMsg" },
+            { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+            { out, "WarningMsg" },
         }, true, {})
     end
 end
