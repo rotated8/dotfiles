@@ -1,24 +1,6 @@
 -- This config is a port of my .vimrc for Neovim.
 vim.opt.modeline = false
 
--- Plugin Management. Replace Vundle with lazy.nvim
-local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    'git', 'clone', '--filter=blob:none', 'https://github.com/folke/lazy.nvim.git',
-    '--branch=stable', -- latest stable release
-    lazypath,
-  })
-end
-vim.opt.rtp:prepend(lazypath)
-
-require('lazy').setup({
-    { 'phha/zenburn.nvim', opts = {} , priority = 1000, lazy = false },
-    { 'nvim-lualine/lualine.nvim', opts = { options = { theme = 'zenburn' } } },
-    { 'windwp/nvim-autopairs', opts = {} },
-    { 'lewis6991/gitsigns.nvim', opts = {} },
-})
-
 -- LSP Setup
 -- Configs copied from https://github.com/neovim/nvim-lspconfig on 2026-01-14.
 vim.lsp.config('ty', {
@@ -121,3 +103,27 @@ vim.keymap.set('n', '<S-Down>', '<Nop>')
 vim.keymap.set('n', '<S-Left>', '<Cmd>bprevious<CR>')
 vim.keymap.set('n', '<S-Right>', '<Cmd>bnext<CR>')
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
+
+-- Plugin Management. https://lazy.folke.io/
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+    local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+    local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+    if vim.v.shell_error ~= 0 then
+        vim.api.nvim_echo({
+              { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+              { out, "WarningMsg" },
+        }, true, {})
+    end
+end
+vim.opt.rtp:prepend(lazypath)
+
+require('lazy').setup({
+    rocks = { enabled = false },
+    spec = {
+        { 'phha/zenburn.nvim', opts = {} , priority = 1000, lazy = false },
+        { 'nvim-lualine/lualine.nvim', opts = { options = { theme = 'zenburn' } } },
+        { 'windwp/nvim-autopairs', opts = {} },
+        { 'lewis6991/gitsigns.nvim', opts = {} },
+    }
+})
