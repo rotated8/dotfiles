@@ -20,15 +20,28 @@ require('lazy').setup({
 })
 
 -- LSP Setup
+-- Configs copied from https://github.com/neovim/nvim-lspconfig on 2026-01-14.
 vim.lsp.config('ty', {
   cmd = { 'ty', 'server' },
   filetypes = { 'python' },
   root_markers = { 'ty.toml', 'pyproject.toml', 'setup.py', 'setup.cfg', 'requirements.txt', '.git' },
   settings = { ty={} }
 })
+vim.lsp.config('ruff', {
+  cmd = { 'ruff', 'server' },
+  filetypes = { 'python' },
+  root_markers = { 'pyproject.toml', 'ruff.toml', '.ruff.toml', '.git' },
+  settings = {
+      lineLength = 121,
+      configuration = {
+          format = {
+              ['quote-style'] = 'single'
+          }
+      }
+  },
+})
 vim.lsp.enable('ty')
-
--- GUI settings have been removed. Neovim doesn't provide a GUI.
+vim.lsp.enable('ruff')
 
 -- Tab Settings
 -- vim.opt.autoindent = true -- Copy indent from current line when starting a new one (Neovim default).
