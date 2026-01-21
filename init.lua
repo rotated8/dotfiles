@@ -104,26 +104,13 @@ vim.keymap.set('n', '<S-Left>', '<Cmd>bprevious<CR>')
 vim.keymap.set('n', '<S-Right>', '<Cmd>bnext<CR>')
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
 
--- Plugin Management. https://lazy.folke.io/
-local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-    local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-    local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-    if vim.v.shell_error ~= 0 then
-        vim.api.nvim_echo({
-            { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-            { out, "WarningMsg" },
-        }, true, {})
-    end
-end
-vim.opt.rtp:prepend(lazypath)
-
-require('lazy').setup({
-    rocks = { enabled = false },
-    spec = {
-        { 'phha/zenburn.nvim', opts = {} , priority = 1000, lazy = false },
-        { 'nvim-lualine/lualine.nvim', opts = { options = { theme = 'zenburn' } } },
-        { 'windwp/nvim-autopairs', opts = {} },
-        { 'lewis6991/gitsigns.nvim', opts = {} },
-    }
+vim.pack.add({
+    'https://github.com/phha/zenburn.nvim',
+    'https://github.com/nvim-lualine/lualine.nvim',
+    'https://github.com/windwp/nvim-autopairs',
+    'https://github.com/lewis6991/gitsigns.nvim',
 })
+require('zenburn').setup()
+require('lualine').setup({ options = { theme = 'zenburn' } })
+require('nvim-autopairs').setup()
+require('gitsigns').setup()
