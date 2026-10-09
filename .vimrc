@@ -5,33 +5,20 @@ set nomodeline
 " Remove previously set autocommands, in case this is reloaded.
 autocmd!
 
-" Vundle Settings
-" 2017/06/28: Make sure to link ~/.vimrc to ~/.config/nvim/init.vim, for Neovim.
-" Clone Vundle (https://github.com/VundleVim/Vundle.vim.git) to one of the locations below.
-" Then run `:PluginInstall` or `vim +PluginInstall +qall` from the command line.
-filetype off
-if has('nvim')
-    if has('win64') || has('win32')
-        let vundle_path = '$HOME/AppData/Local/nvim/bundle/Vundle.vim'
-    else
-        let vundle_path = '~/.config/nvim/bundle/Vundle.vim'
-    endif
-else
-    let vundle_path = '~/.vim/bundle/Vundle.vim'
+" Vim-Plug https://github.com/junegunn/vim-plug
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent execute '!curl -fLo '~/.vim/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
-let &runtimepath .= ',' . vundle_path
-call vundle#begin(vundle_path)
-Plugin 'VundleVim/Vundle.vim' " Load Vundle.
-Plugin 'vim-airline/vim-airline' " A powerline replacement. Makes the bottom line pretty.
-Plugin 'Townk/vim-autoclose' " Closes matched pairs automatically.
-Plugin 'airblade/vim-gitgutter' " In a git repo, show the file's git state in the gutter.
-if has('nvim') || (v:version >= 800) " Ale errors on install for Vim 7.4- the Ubuntu 16.04 default
-    Plugin 'w0rp/ale' " Automatically lint files.
-endif
-Plugin 'jnurmine/Zenburn' " Colorscheme.
-Plugin 'rust-lang/rust.vim' " Rust linting
-call vundle#end()
-filetype plugin indent on
+call plug#begin()
+Plug 'vim-airline/vim-airline' " A powerline replacement. Makes the bottom line pretty.
+Plug 'Townk/vim-autoclose' " Closes matched pairs automatically.
+Plug 'airblade/vim-gitgutter' " In a git repo, show the file's git state in the gutter.
+Plug 'jnurmine/Zenburn' " Colorscheme.
+Plug 'rust-lang/rust.vim', { 'for': 'rust' } " Rust linting
+call plug#end()
+" Use the Zenburn colorscheme we downloaded with Vim-Plug, but don't complain if it's missing
+silent! colorscheme zenburn
 
 " vim-airline Settings
 " Be sure to use a patched Powerline font.
@@ -44,8 +31,6 @@ let g:airline_powerline_fonts = 1
 set noshowmode
 " Always show the status line. (nvim default)
 set laststatus=2
-" Show ALE errors and warnings
-let g:airline#extensions#ale#enabled = 1
 
 " vim-autoclose Settings
 " Add angle brackets to autoclose for HTML
@@ -84,9 +69,6 @@ augroup END
 
 " Turn syntax highlighting on.
 syntax on
-" Use the Zenburn colorscheme we downloaded with Vundle
-" (Don't complain if it hasn't been downloaded)
-silent! colorscheme zenburn
 " Number lines
 set number
 " Don't wrap lines until column 111

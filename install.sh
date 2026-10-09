@@ -28,19 +28,4 @@ for dotfile in ".vimrc" ".bashrc" ".inputrc" ".gitconfig" ".tmux.conf" "git-comp
     fi
 done
 
-# Only set up Vim if it is present with a .vimrc
-if [[ -n "`command -v vim`" && -e "${HOME}/.vimrc" ]]; then
-    # Install Vundle if it is missing.
-    echo "Installing Vim plugins..."
-    if [[ ! -d "${HOME}/.vim/bundle/Vundle.vim" ]]; then
-        git clone --quiet https://github.com/VundleVim/Vundle.vim.git "${HOME}/.vim/bundle/Vundle.vim"
-    fi
-
-    # Install plugins
-    # -E = Start in Ex mode. -s = Silent. -S = Source this file (since -E won't do it)
-    vim -EsS "${HOME}/.vimrc" +PluginInstall +qall 1> /dev/null 2> /dev/null
-else
-    echo "Vim or a .vimrc are missing, moving on..."
-fi
-
 echo "Successfully finished installation!"
