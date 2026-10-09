@@ -1,4 +1,4 @@
-" I couldn't care less about Vi. (nvim default)
+" I couldn't care less about Vi.
 set nocompatible
 " Modelines may be a security hole.
 set nomodeline
@@ -29,7 +29,7 @@ let g:airline_powerline_fonts = 1
 "set t_Co=256
 " Mode is displayed by airline, so don't show it twice.
 set noshowmode
-" Always show the status line. (nvim default)
+" Always show the status line.
 set laststatus=2
 
 " vim-autoclose Settings
@@ -56,7 +56,7 @@ if has('win64') || has('win32')
 endif
 
 " Tabs are four spaces...
-set autoindent " Copy indent from current line when starting a new one. (nvim default)
+set autoindent " Copy indent from current line when starting a new one.
 set expandtab " Never tabs, always convert to spaces.
 set tabstop=4
 set shiftwidth=4
@@ -78,7 +78,7 @@ set colorcolumn=99
 highlight ColorColumn ctermbg=238 guibg=#444444
 " Highlight the line the cursor is on
 set cursorline
-" Make tab completion interactable. (nvim default)
+" Make tab completion interactable.
 set wildmenu
 " Don't redraw during macros, and other untyped input.
 set lazyredraw
@@ -88,11 +88,11 @@ set splitright
 set splitbelow
 " Keep five lines at top or bottom of the screen if possible.
 set scrolloff=5
-" If the last line is too long, show as much of it as possible. (nvim default)
+" If the last line is too long, show as much of it as possible.
 set display=lastline
 " No more annoying file.ext~ backup files!
 set nobackup
-" Allow backspace/delete affect what it likes. (nvim default)
+" Allow backspace/delete affect what it likes.
 set backspace=indent,eol,start
 " UTF-8 by default.
 set encoding=utf-8
