@@ -12,8 +12,8 @@ Notes
 
 The `.vimrc` uses vundle. Installation instructions are in the .vimrc file; `head -n 20 ./.vimrc` is an easy way to read them.
 
-My preferred font is [Iosevka](https://be5invis.github.io/Iosevka/)- get the latest release of Iosevka Term.
-Iosevka works well with vim-airline, and is used by default in configs.
+My preferred font is [Iosevka](https://be5invis.github.io/Iosevka/). I use Iosevka Term, updating when I need to install.
+It works well with vim-airline, and is used by default in configs.
 
 Links
 -----
