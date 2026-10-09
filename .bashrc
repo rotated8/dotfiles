@@ -60,17 +60,6 @@ export EDITOR=vim
 export VISUAL=gvim
 export GIT_EDITOR=vim
 
-# Prefer nvim if installed. https://neovim.io/
-if [[ -f "/usr/bin/nvim" || -d /opt/nvim-linux-x86_64/ ]]; then
-    # If nvim not findable, add it to $PATH
-    if [[ ! -f "/usr/bin/nvim" && ":$PATH:" != *":/opt/nvim-linux-x86_64/bin:"* ]]; then
-        export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
-    fi
-    alias vim='nvim' # If you need vim, run `command vim` instead.
-    export EDITOR=nvim
-    export GIT_EDITOR=nvim
-fi
-
 # Use git bash completion if it exists.
 test -f ~/git-completion.bash && . ~/git-completion.bash
 
